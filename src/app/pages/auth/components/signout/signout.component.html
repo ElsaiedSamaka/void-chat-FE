@@ -1,0 +1,11 @@
+<p>
+  signout works!
+</p>
+<!-- for signing a user out all we have to do is the below code -->
+<!-- force the user to navigate to the signout path this path is already defined with the SignoutComponent -->
+<!-- the signoutcomponent itself contains the logic to make an api request to logging the user out -->
+<!-- the request issued from this SignoutComponent at the backend contains the logic to clear token -->
+<!-- once this request complete we are navigate user to "/" which in the current context is nothing but SigninComponent -->
+<a class="" routerLink="/signout" routerLinkActive="active">
+  تسجيل الخروج
+</a>

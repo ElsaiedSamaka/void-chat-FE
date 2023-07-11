@@ -1,0 +1,48 @@
+<section class="h-screen w-screen text-gray-800">
+  <div class="flex flex-row h-full w-full ">
+    <div class="flex flex-col justify-between items-stretch py-4 pl-6 pr-2 w-80  flex-shrink-0">
+      <div class="flex flex-row items-center justify-center h-12 w-full ">
+        <div class="flex items-center justify-center rounded-3xl  bg-green-100 h-10 w-10">
+          <svg class="w-6 h-6 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+            </path>
+          </svg>
+        </div>
+        <div class="ml-2 font-bold text-2xl">VoidChat</div>
+      </div>
+      <div class="flex flex-col items-center bg-green-100 border border-gray-200 mt-4 py-6 px-4 rounded-2xl">
+        <div class="h-20 w-20 rounded-full border overflow-hidden">
+          <img [src]="currentUser.user_img" [alt]="currentUser.username" class="h-full w-full" />
+        </div>
+        <div class=" font-semibold mt-2">{{currentUser.username}}</div>
+        <div class="text-xs text-gray-500">{{currentUser.email}}</div>
+        <div class="flex flex-row items-center mt-3">
+          <!-- Toggle theme switch -->
+          <div class="toggle-switch">
+            <label class="switch-label">
+              <input type="checkbox" class="checkbox">
+              <span class="slider"></span>
+            </label>
+      </div>
+        </div>
+      </div>
+      <div class="flex flex-col mt-8">
+    <!-- <app-group-list></app-group-list> -->
+    <app-private-list></app-private-list>
+      </div>
+      <a routerLink="/signout"
+        class="flex justify-center items-center space-x-2  p-2 rounded-2xl no-underline bg-green-100 hover:cursor-pointer hover:bg-green-700 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"></path>
+        </svg>
+        <span>Logout</span>
+      </a>
+    </div>
+    <div class="p-5 h-full w-full ">
+      <app-chat></app-chat>
+    </div>
+  </div>
+</section>
