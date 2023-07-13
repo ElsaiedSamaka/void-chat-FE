@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
-import { ChatService } from 'src/core/services/chat.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +9,11 @@ import { ChatService } from 'src/core/services/chat.service';
 })
 export class HomeComponent implements OnInit {
   currentUser: any;
-
+  preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
+  currentTheme: string = '';
   constructor(
-    private chatService: ChatService,
     private authService: AuthService,
     private themeService: ThemeService
   ) {}
@@ -27,12 +28,6 @@ export class HomeComponent implements OnInit {
     });
   }
   toggleTheme() {
-    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
-      .matches
-      ? 'dark'
-      : 'light';
-    const savedTheme = localStorage.getItem('theme');
-    const themeToSet = savedTheme || preferredTheme;
-    this.themeService.toggleTheme(themeToSet);
+    this.themeService.toggleTheme();
   }
 }
