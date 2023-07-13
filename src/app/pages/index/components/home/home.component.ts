@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
 
@@ -12,15 +13,26 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private chatService: ChatService,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
     this.getCurrentUser();
+    this.toggleTheme();
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
       this.currentUser = res;
     });
+  }
+  toggleTheme() {
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
+      .matches
+      ? 'dark'
+      : 'light';
+    const savedTheme = localStorage.getItem('theme');
+    const themeToSet = savedTheme || preferredTheme;
+    this.themeService.toggleTheme(themeToSet);
   }
 }
