@@ -20,7 +20,8 @@
       [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
       placeholder="search your contacts.." [autofocus]="true">
       <div class="new-chat relative">
-        <svg class=" w-5 h-5 hover:cursor-pointer hover:text-green-400" (hover)="toggleToolTip()" fill="none"
+        <svg class=" w-5 h-5 hover:cursor-pointer hover:text-green-400" (mouseenter)="toggleToolTip()"
+          (mouseleave)="toggleToolTip()" fill="none"
           stroke="currentColor" stroke-width="1.5"
     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path stroke-linecap="round" stroke-linejoin="round"
@@ -28,7 +29,7 @@
     </path>
   </svg>
   <!-- Tooltip -->
-  <div id="tooltip-right" role="tooltip"
+  <div id="tooltip-right" role="tooltip" *ngIf="showNewChatTooltip"
     class="absolute z-10  top-0 left-5 inline-block px-3 py-2 text-sm font-medium text-black bg-gray-50 rounded-lg shadow-md  tooltip ">
     chat with new contact
     <div class="tooltip-arrow" data-popper-arrow></div>
