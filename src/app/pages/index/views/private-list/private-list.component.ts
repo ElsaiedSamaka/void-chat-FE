@@ -15,7 +15,7 @@ export class PrivateListComponent implements OnInit {
   contacts: any[] = [];
   selectedContact: any;
   theme: string = '';
-
+  showSearchInput: boolean = false;
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
@@ -64,5 +64,8 @@ export class PrivateListComponent implements OnInit {
     this.themeService.theme$.subscribe((theme) => {
       this.theme = theme;
     });
+  }
+  toggleSearchInput() {
+    this.showSearchInput = !this.showSearchInput;
   }
 }
