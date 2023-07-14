@@ -42,7 +42,8 @@
   </div>
   <div class="sender rounded-b-xl"
     [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
-  <form (ngSubmit)="sendMessage()" class="flex items-center justify-between z-10 space-x-4 rounded-xl bg-white p-2 m-4 ">
+  <form (ngSubmit)="sendMessage()" class="flex items-center justify-between z-10 space-x-4 rounded-xl  p-2 m-4 "
+    [ngClass]="theme == 'dark'?'bg-[#3333] text-dark-secondary':'bg-gray-100  text-light-secondary'">
     <!-- Left section with a search icon -->
     <div class="p-2">
       <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
