@@ -17,11 +17,12 @@
           [ngClass]=" message.sender.id === currentUser.id ? 'col-start-6 col-end-13':'col-start-1 col-end-8' "
           *ngFor="let message of messages">
           <div class="flex  items-center" [ngClass]=" message.sender.id === currentUser.id ? 'flex-row-reverse':'flex-row'">
-            <div class=""
+            <div
               [ngClass]=" message.sender.id === currentUser.id ?'flex items-center justify-center h-10 w-10 rounded-full bg-green-800 text-gray-100 flex-shrink-0':'flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white flex-shrink-0'">
               {{message.sender.username[0].toUpperCase()}}
             </div>
             <div class="relative   py-2 px-4 shadow rounded-xl"
+            [ngClass]="theme == 'dark'?'bg-[#333333] text-dark-secondary':' text-light-secondary'"
               [ngClass]=" message.sender.id === currentUser.id ?' mr-3 bg-indigo-100 ':' ml-3 bg-white'">
               <div>{{message.message}}</div>
             </div>
