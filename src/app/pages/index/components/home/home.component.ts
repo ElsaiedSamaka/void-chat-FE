@@ -9,18 +9,11 @@ import { AuthService } from 'src/core/services/auth.service';
 })
 export class HomeComponent implements OnInit {
   currentUser: any;
-  preferredTheme: string = '';
-  savedTheme: string = '';
   theme: string = '';
   constructor(
     private authService: AuthService,
     private themeService: ThemeService
-  ) {
-    this.preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
-      .matches
-      ? 'dark'
-      : 'light';
-  }
+  ) {}
 
   ngOnInit() {
     this.getCurrentUser();
@@ -33,12 +26,10 @@ export class HomeComponent implements OnInit {
   }
   toggleTheme() {
     this.getCurrentTheme();
-    const themeToSet = this.savedTheme == 'dark' ? 'light' : 'dark';
+    const themeToSet = this.theme == 'dark' ? 'light' : 'dark';
     this.themeService.toggleTheme(themeToSet);
-    console.log('themeToSet', themeToSet);
   }
   getCurrentTheme() {
-    this.savedTheme = localStorage.getItem('theme') || this.preferredTheme;
     this.themeService.theme$.subscribe((theme) => {
       this.theme = theme;
     });
