@@ -21,12 +21,12 @@ export class ThemeService {
   toggleTheme(themeToSet: string): void {
     switch (themeToSet) {
       case 'dark':
-        document.body.classList.toggle('dark');
+        document.body.classList.replace('dark', 'light');
         localStorage.setItem('theme', 'dark');
         this.theme$.next('dark');
         break;
       case 'light':
-        document.body.classList.toggle('dark');
+        document.body.classList.replace('light', 'dark');
         localStorage.setItem('theme', 'light');
         this.theme$.next('light');
         break;
