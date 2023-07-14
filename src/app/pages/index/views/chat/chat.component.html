@@ -40,6 +40,8 @@
         </ng-template>
       </div>
   </div>
+  <div class="sender rounded-b-xl"
+    [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
   <form (ngSubmit)="sendMessage()" class="flex items-center justify-between z-10 space-x-4 rounded-xl bg-white p-2 m-4 ">
     <!-- Left section with a search icon -->
     <div class="p-2">
@@ -71,4 +73,5 @@
       </button>
     </div>
   </form>
+  </div>
 </div>
