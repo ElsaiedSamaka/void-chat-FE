@@ -16,7 +16,8 @@
   <div class=" mt-4 -mx-2">
     <div class="flex items-center justify-around" *ngIf="showSearchInput">
     <input type="search"
-      class="p-2 m-4 w-4/5 h-full rounded-xl bg-gray-50 !border-1 outline border-green-100 ring-green-300 focus:outline-green-500"
+      class="p-2 m-4 w-4/5 h-full rounded-xl !border-1 outline border-green-100 ring-green-300 focus:outline-green-500"
+      [ngClass]="theme == 'dark'?' bg-dark-accent text-gray-50':' bg-gray-50 text-light-secondary'"
       placeholder="search your contacts.." [autofocus]="true">
   <svg class="w-5 h-5 hover:cursor-pointer hover:text-green-400" fill="none" stroke="currentColor" stroke-width="1.5"
     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
