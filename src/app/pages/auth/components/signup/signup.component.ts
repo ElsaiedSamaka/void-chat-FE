@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { MatchPassword } from 'src/core/validators/match-password';
 
@@ -12,6 +13,8 @@ import { MatchPassword } from 'src/core/validators/match-password';
 export class SignupComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
+  theme: string = '';
+
   authForm = new FormGroup(
     {
       email: new FormControl('', [
@@ -36,8 +39,11 @@ export class SignupComponent implements OnInit {
   constructor(
     private matchPassword: MatchPassword,
     private authService: AuthService,
+    private themeService: ThemeService,
     private router: Router
-  ) {}
+  ) {
+    this.getCurrentTheme();
+  }
   onSubmit() {
     if (this.authForm.invalid) {
       return;
@@ -74,5 +80,10 @@ export class SignupComponent implements OnInit {
     setTimeout(() => {
       this.showToast = false;
     }, 4000);
+  }
+  getCurrentTheme() {
+    this.themeService.theme$.subscribe((theme) => {
+      this.theme = theme;
+    });
   }
 }

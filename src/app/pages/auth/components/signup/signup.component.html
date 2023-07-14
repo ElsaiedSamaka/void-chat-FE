@@ -1,4 +1,4 @@
-<section class="bg-gray-100 ">
+<section class="" [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-gray-50  text-light-secondary'">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
     <div class="flex flex-row items-center justify-center h-12 w-full my-2">
       <div class="flex items-center justify-center rounded-3xl  bg-green-100 h-10 w-10">
@@ -12,30 +12,31 @@
       <div class="ml-2 font-bold text-2xl :text-gray-100">VoidChat</div>
     </div>
     <div
-      class="w-full bg-white rounded-2xl shadow :border md:mt-0 sm:max-w-md xl:p-0 :bg-gray-800 :border-gray-700">
+    [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white  text-light-secondary'"
+      class="w-full rounded-2xl shadow :border md:mt-0 sm:max-w-md xl:p-0 ">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl :text-white">
           Create an account
         </h1>
         <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6">
           <div>
-            <label for="email" class="block mb-2  font-medium text-gray-900 :text-white">Your email</label>
+            <label for="email" class="block mb-2  font-medium ">Your email</label>
             <input formControlName="email" type="email" name="email" id="email"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm: rounded-2xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 :bg-gray-700 :border-gray-600 :placeholder-gray-400 :text-white :focus:ring-blue-500 :focus:border-blue-500"
+              class=" border border-gray-300  rounded-2xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 :bg-gray-700 :border-gray-600 :placeholder-gray-400 :text-white :focus:ring-blue-500 :focus:border-blue-500"
               placeholder="lorem@ipsum.com" required="">
           </div>
           <div>
-            <label for="password" class="block mb-2  font-medium text-gray-900 :text-white">Password</label>
+            <label for="password" class="block mb-2  font-medium">Password</label>
             <input formControlName="password" type="password" name="password" id="password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm: rounded-2xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 :bg-gray-700 :border-gray-600 :placeholder-gray-400 :text-white :focus:ring-blue-500 :focus:border-blue-500"
+              class=" border border-gray-300  rounded-2xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 :bg-gray-700 :border-gray-600 "
               required="">
           </div>
           <div>
-            <label for="confirm-password" class="block mb-2  font-medium text-gray-900 :text-white">Confirm
+            <label for="confirm-password" class="block mb-2  font-medium ">Confirm
               password</label>
             <input formControlName="passwordConfirmation" type="confirm-password" name="confirm-password" id="confirm-password"
               placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm: rounded-2xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 :bg-gray-700 :border-gray-600 :placeholder-gray-400 :text-white :focus:ring-blue-500 :focus:border-blue-500"
+              class=" border border-gray-300 rounded-2xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  "
               required="">
           </div>
           <div class="flex items-start">
@@ -45,14 +46,15 @@
                 >
             </div>
             <div class="ml-3 ">
-              <label for="terms" class="font-light text-gray-500 :text-gray-300">Remember me</label>
+              <label for="terms" class="font-light">Remember me</label>
             </div>
           </div>
           <button type="submit" [disabled]="authForm.invalid"
-             class="w-full border border-green-600 hover:bg-gradient-to-br from-green-400  to-green-800 hover:cursor-pointer hover:text-gray-50 focus:ring-2 focus:ring-green-300  font-medium rounded-2xl  px-5 py-2.5 text-center ">Create
+            [ngClass]="theme == 'dark'?'bg-gradient-to-bl from-green-400  to-green-800  text-dark-secondary':'bg-gradient-to-bl from-green-400  to-green-800  text-light-primary'"
+             class="w-full border border-green-600 hover:bg-gradient-to-br from-green-400  to-green-800 hover:cursor-pointer hover:text-gray-50 focus:ring-2 focus:ring-green-300  font-semibold rounded-2xl  px-5 py-2.5 text-center ">Create
             an account</button>
-          <p class=" font-light text-gray-500 ">
-            Already have an account? <a class="font-medium text--600 hover:underline "
+          <p class=" font-light ">
+            Already have an account? <a class="font-medium text-green-300 hover:underline "
               routerLink="/">Login
               here</a>
           </p>
