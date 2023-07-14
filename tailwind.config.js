@@ -5,15 +5,15 @@ module.exports = {
     extend: {
       colors: {
         dark: {
-          primary: "blue",
-          secondary: "#2d3748",
-          accent: "#e2e8f0",
+          primary: "black",
+          secondary: "#ededed",
+          accent: "#888888",
           white: "#fff",
         },
         light: {
-          primary: "red",
-          secondary: "#f7fafc",
-          accent: "#718096",
+          primary: "#c9ecde",
+          secondary: "#2d3748",
+          accent: "#009f60",
           black: "#000",
         },
       },
