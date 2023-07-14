@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from 'src/core/services/auth.service';
 export class SigninComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
+  theme: string = '';
 
   authForm = new FormGroup({
     email: new FormControl('', [
@@ -25,7 +27,13 @@ export class SigninComponent implements OnInit {
       Validators.maxLength(25),
     ]),
   });
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private themeService: ThemeService,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.getCurrentTheme();
+  }
 
   ngOnInit() {}
   onSubmit() {
@@ -62,5 +70,10 @@ export class SigninComponent implements OnInit {
     setTimeout(() => {
       this.showToast = false;
     }, 4000);
+  }
+  getCurrentTheme() {
+    this.themeService.theme$.subscribe((theme) => {
+      this.theme = theme;
+    });
   }
 }
