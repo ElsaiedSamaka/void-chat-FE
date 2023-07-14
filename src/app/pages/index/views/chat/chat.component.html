@@ -55,8 +55,9 @@
     </div>
     <!-- Middle section with a search input -->
     <div class="flex-grow p-2">
-      <input type="text" [(ngModel)]="newMessage" name="message"
-        class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 text-gray-600" />
+      <input type="text" [(ngModel)]="newMessage" name="message" placeholder="say Hello :)"
+        class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 "
+        [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'" />
     </div>
     <!-- Right section with a send button -->
     <div class="p-2">
