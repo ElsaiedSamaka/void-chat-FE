@@ -55,3 +55,5 @@
         </div>
         </div>
         </section>
+        <!-- Toast -->
+        <app-toast *ngIf="showToast" toastType="error" [toastMessage]="toastMessage" (dismiss)="toggleToast()"></app-toast>
