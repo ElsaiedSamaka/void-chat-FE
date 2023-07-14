@@ -16,6 +16,7 @@ export class PrivateListComponent implements OnInit {
   selectedContact: any;
   theme: string = '';
   showSearchInput: boolean = false;
+  showNewChatTooltip: boolean = false;
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
@@ -67,5 +68,8 @@ export class PrivateListComponent implements OnInit {
   }
   toggleSearchInput() {
     this.showSearchInput = !this.showSearchInput;
+  }
+  toggleToolTip() {
+    this.showNewChatTooltip = !this.showNewChatTooltip;
   }
 }
