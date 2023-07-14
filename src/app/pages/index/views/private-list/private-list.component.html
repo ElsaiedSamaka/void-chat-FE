@@ -1,20 +1,23 @@
 <div class="private-list px-3" [ngClass]="theme == 'dark'?' text-dark-secondary':'  text-light-secondary'">
   <div class="flex flex-row items-center justify-between text-xs mt-6">
     <span class="font-bold">Private</span>
+  <div class="flex items-center space-x-2">
     <span [ngClass]="theme == 'dark'?' bg-dark-accent text-gray-50':' bg-gray-50 text-light-secondary'"
       class="flex items-center justify-center  h-5 w-5 rounded-full">{{contacts.length}}</span>
+        <svg class="w-6 h-6  hover:text-green-400 hover:cursor-pointer" fill="none" stroke="currentColor" stroke-width="1.5"
+          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
+          </path>
+        </svg>
+        </div>
   </div>
   <div class=" mt-4 -mx-2">
     <div class="flex items-center justify-around">
     <input type="search"
       class="p-2 m-4 w-4/5 h-full rounded-xl border-2 border-green-100 ring-green-300 focus:outline-green-500"
       placeholder="search your contacts..">
-    <svg class="w-6 h-6  hover:text-green-400 hover:cursor-pointer" fill="none" stroke="currentColor"
-      stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round"
-        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
-      </path>
-    </svg>
+  
     </div>
     <div class="flex flex-col space-y-1 h-52 overflow-scroll">
       <ng-container *ngIf="contacts.length >0; else nocontacteduser">
