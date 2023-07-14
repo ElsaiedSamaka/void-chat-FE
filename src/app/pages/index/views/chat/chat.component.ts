@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
 import { SharedService } from '../../services/shared.service';
@@ -20,12 +21,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   selectedContact: any;
   messages: any[] = [];
   newMessage = '';
-
+  theme: string = '';
   constructor(
     private chatService: ChatService,
     private sharedService: SharedService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private themeService: ThemeService
+  ) {
+    this.getCurrentTheme();
+  }
 
   @ViewChild('chatContainer', { static: false }) chatContainer: ElementRef;
 
@@ -80,5 +84,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.chatContainer.nativeElement.scrollTop =
         this.chatContainer.nativeElement.scrollHeight;
     }
+  }
+  getCurrentTheme() {
+    this.themeService.theme$.subscribe((theme) => {
+      this.theme = theme;
+    });
   }
 }
