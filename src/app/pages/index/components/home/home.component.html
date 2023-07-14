@@ -11,16 +11,17 @@
           </svg>
         </div>
         <!-- one way to handle themeing is below -->
-        <div class="ml-2 font-bold text-2xl" [class.dark]="theme == 'dark'" [class.light]="theme == 'light'">VoidChat</div>
+        <!-- [class.dark]="theme == 'dark'" [class.light]="theme == 'light'" -->
+        <div class="ml-2 font-bold text-2xl">VoidChat</div>
       </div>
       <!-- another way to handle themeing -->
-      <div [ngClass]="theme == 'dark'?'bg-dark-primary':'bg-light-primary'"
-        class="flex flex-col items-center bg-primary-100 border border-gray-200 mt-4 py-6 px-4 rounded-2xl">
-        <div class="h-20 w-20 rounded-full border overflow-hidden">
+      <div [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-light-primary text-light-secondary'"
+        class="flex flex-col items-center  border border-gray-200 mt-4 py-6 px-4 rounded-2xl">
+        <div class="h-20 w-20 rounded-full  overflow-hidden">
           <img [src]="currentUser.user_img" [alt]="currentUser.username" class="h-full w-full" />
         </div>
         <div class=" font-semibold mt-2">{{currentUser.username}}</div>
-        <div class="text-xs text-gray-500">{{currentUser.email}}</div>
+        <div class="text-xs ">{{currentUser.email}}</div>
         <div class="flex flex-row items-center mt-3">
           <!-- Toggle theme switch -->
           <div class="toggle-switch">
@@ -36,7 +37,8 @@
     <app-private-list></app-private-list>
       </div>
       <a routerLink="/signout"
-        class="flex justify-center items-center space-x-2  p-2 rounded-2xl no-underline bg-green-100 hover:cursor-pointer hover:bg-green-700 hover:text-white">
+      [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-light-primary text-light-secondary'"
+        class="flex justify-center items-center space-x-2  p-2 rounded-2xl no-underline hover:cursor-pointer  ">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"></path>
