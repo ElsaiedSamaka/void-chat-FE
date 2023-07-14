@@ -19,12 +19,12 @@ export class HomeComponent implements OnInit {
       .matches
       ? 'dark'
       : 'light';
-    this.savedTheme = localStorage.getItem('theme');
   }
 
   ngOnInit() {
     this.getCurrentUser();
-    this.toggleTheme();
+    this.savedTheme = localStorage.getItem('theme') || this.preferredTheme;
+    console.log('savedTheme intial', this.savedTheme);
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
@@ -32,7 +32,10 @@ export class HomeComponent implements OnInit {
     });
   }
   toggleTheme() {
-    const themeToSet = this.savedTheme || this.preferredTheme;
+    this.savedTheme = localStorage.getItem('theme') || this.preferredTheme;
+    console.log('savedTheme', this.savedTheme);
+    const themeToSet = this.savedTheme == 'dark' ? 'light' : 'dark';
+    console.log('themeToSet', themeToSet);
     this.themeService.toggleTheme(themeToSet);
   }
 }
