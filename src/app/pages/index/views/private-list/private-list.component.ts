@@ -70,7 +70,6 @@ export class PrivateListComponent implements OnInit {
     this.showSearchInput = !this.showSearchInput;
   }
   toggleToolTip() {
-    console.log('mouseover');
     this.showNewChatTooltip = !this.showNewChatTooltip;
   }
 }
