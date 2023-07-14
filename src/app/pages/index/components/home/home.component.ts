@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   currentUser: any;
   preferredTheme: string = '';
   savedTheme: string = '';
+  theme: string = '';
   constructor(
     private authService: AuthService,
     private themeService: ThemeService
@@ -38,5 +39,8 @@ export class HomeComponent implements OnInit {
   }
   getCurrentTheme() {
     this.savedTheme = localStorage.getItem('theme') || this.preferredTheme;
+    this.themeService.theme$.subscribe((theme) => {
+      this.theme = theme;
+    });
   }
 }

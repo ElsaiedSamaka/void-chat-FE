@@ -12,7 +12,8 @@
         </div>
         <div class="ml-2 font-bold text-2xl">VoidChat</div>
       </div>
-      <div class="flex flex-col items-center bg-primary-100 border border-gray-200 mt-4 py-6 px-4 rounded-2xl">
+      <div [ngClass]="theme == 'dark'?'bg-light-primary':'bg-dark-primary'"
+        class="flex flex-col items-center bg-primary-100 border border-gray-200 mt-4 py-6 px-4 rounded-2xl">
         <div class="h-20 w-20 rounded-full border overflow-hidden">
           <img [src]="currentUser.user_img" [alt]="currentUser.username" class="h-full w-full" />
         </div>
