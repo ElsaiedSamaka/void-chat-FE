@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300&display=swap');
-
+@import url('./dark.theme');
+@import url('./light.theme');
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -8,9 +9,6 @@
 body{
     font-family:  'Almarai' ;
 }
-/* .dark{
-  background-color:#128644
-} */
 * {
   margin: 0;
   padding: 0;
