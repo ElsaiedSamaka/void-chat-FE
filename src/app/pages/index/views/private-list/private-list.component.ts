@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
 import { UsersService } from 'src/core/services/users.service';
@@ -13,17 +14,21 @@ export class PrivateListComponent implements OnInit {
   users: any[] = [];
   contacts: any[] = [];
   selectedContact: any;
+  theme: string = '';
+
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
     private chatService: ChatService,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
     // TODO: we gonna call this below method on searching or getting all users
     // this.getUsers();
     this.getContactedUsers();
+    this.getCurrentTheme();
   }
   selecteContact(contact: any) {
     this.selectedContact = contact;
@@ -53,6 +58,11 @@ export class PrivateListComponent implements OnInit {
         console.log('error while retreiveing users', err);
       },
       complete: () => {},
+    });
+  }
+  getCurrentTheme() {
+    this.themeService.theme$.subscribe((theme) => {
+      this.theme = theme;
     });
   }
 }
