@@ -1,14 +1,15 @@
 <div class="chat-container relative flex flex-col justify-between bg-gray-100 h-full w-full rounded-3xl  ">
 <div class="flex items-center z-10 backdrop-blur-sm border border-gray-300 border-b-3   p-5 text-xl  rounded-t-2xl"
-  [ngClass]="theme == 'dark'?'bg-dark-primary':'bg-light-primary'">
+  [ngClass]="theme == 'dark'?'bg-dark-primary':'bg-light-primary'" [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-light-primary text-light-secondary'">
   <div class="relative inline mx-2">
     <img class="w-10 h-10 rounded-full" [src]="selectedContact?.user_img" alt="">
     <span
       class="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
   </div>
-  <span class="text-2xl font-semibold text-gray-600">{{selectedContact?.username}}</span>
+  <span class="text-2xl font-semibold ">{{selectedContact?.username}}</span>
 </div>
-  <div class="p-2  overflow-y-scroll " #chatContainer>
+  <div class="p-2  overflow-y-scroll "
+    [ngClass]="theme == 'dark'?'bg-[#333333] text-dark-secondary':' text-light-secondary'" #chatContainer>
       <div class="grid grid-cols-12 gap-y-2">
         <!-- Message template -->
         <ng-container *ngIf="messages.length >0; else nomessages">
