@@ -33,11 +33,10 @@ export class HomeComponent implements OnInit {
   toggleTheme() {
     this.getCurrentTheme();
     const themeToSet = this.savedTheme == 'dark' ? 'light' : 'dark';
-    console.log('themeToSet', themeToSet);
     this.themeService.toggleTheme(themeToSet);
+    console.log('themeToSet', themeToSet);
   }
   getCurrentTheme() {
     this.savedTheme = localStorage.getItem('theme') || this.preferredTheme;
-    console.log('savedTheme', this.savedTheme);
   }
 }
