@@ -1,8 +1,8 @@
-<div class="private-list px-3" [ngClass]="theme == ''?' text--secondary':'  text-light-secondary'">
+<div class="private-list px-3" [ngClass]="theme == 'dark'?' text-dark-secondary':'  text-light-secondary'">
   <div class="flex flex-row items-center justify-between text-xs mt-6">
     <span class="font-bold">Private</span>
     <div class="flex items-center space-x-2">
-      <span [ngClass]="theme == ''?' bg--accent text-gray-50':' bg-gray-50 text-light-secondary'"
+      <span [ngClass]="theme == ''?' bg-dark-accent text-gray-50':' bg-gray-50 text-light-secondary'"
         class="flex items-center justify-center  h-5 w-5 rounded-full">{{contacts.length}}</span>
       <svg (click)="toggleSearchInput()" class="w-6 h-6  hover:text-green-400 hover:cursor-pointer" fill="none"
         stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -16,11 +16,11 @@
   <div class=" mt-4 -mx-2">
     <div class="flex items-center justify-around" *ngIf="showSearchInput">
       <input type="search"
-        class="p-2 m-4 w-4/5 h-full rounded-xl !border-1  border-green-100 ring-green-300 focus:outline-green-500"
-        [ngClass]="theme == ''?' bg--accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
+        class="p-2 m-4 w-4/5 h-full rounded-xl border-2  border-gray-100 ring-green-300 focus:outline-green-500"
+        [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
         placeholder="search your contacts.." [autofocus]="true">
       <div class="new-chat relative">
-        <svg class=" w-5 h-5 hover:cursor-pointer hover:text-green-400" (mouseenter)="toggleToolTip()"
+        <svg class=" w-5 h-5 hover:cursor-pointer hover:text-green-400" (mouseenter)="toggleToolTip()" (click)="toggleModel()"
           (mouseleave)="toggleToolTip()" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -38,9 +38,9 @@
     <div class="flex flex-col space-y-1 h-52 overflow-scroll">
       <ng-container *ngIf="contacts.length >0; else nocontacteduser">
         <div class="flex flex-row items-center  hover:bg-gray-400 hover:cursor-pointer rounded-xl p-2"
-          [ngClass]="theme == ''?'bg--primary text--secondary':'bg-gray-50 text-light-secondary'"
+          [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-gray-50 text-light-secondary'"
           *ngFor="let contact of contacts" (click)="selecteContact(contact)">
-          <div [ngClass]="theme == ''?'bg--accent text--secondary':'bg-white text-light-secondary'"
+          <div [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white text-light-secondary'"
             class="flex items-center justify-center h-8 w-8 border-1 border-gray-900  rounded-full">
             {{contact.id}}
           </div>
@@ -54,10 +54,10 @@
   </div>
 </div>
 <!-- new chat modal  -->
-<app-modal *ngIf="true">
+<app-modal *ngIf="showModal">
   <div modal-header>
     <div class="flex flex-row-reverse justify-between ">
-      <button type="button"
+      <button type="button" (click)="toggleModel()"
         class=" text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-3xl text-sm p-1.5  inline-flex items-center"
         data-modal-hide="popup-modal">
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
