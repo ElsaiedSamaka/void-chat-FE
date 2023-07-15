@@ -117,22 +117,22 @@
       </div>
       <div class="flex flex-col p-2 border-2 border-gray-200 border-dashed border-t-0 w-full h-full rounded-b-3xl">
         <div class="flex flex-row-reverse justify-start">
-          <button (click)="true"
-            class="inline-block  shrink-0 rounded-3xl border border-gray-300 mx-1 px-6 py-2 text-sm font-semibold hover:bg-gray-400 hover:text-white focus:outline-none active:text-white disabled:cursor-not-allowed">
-            cancel
-          </button>
-          <button type="submit"
-            class="flex items-center bg-black shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold text-white hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
-            [disabled]="true">
-<span>Send</span>
-<span class="ml-2">
-  <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round"
-      d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5">
-    </path>
-  </svg>
-</span>
+            <button type="submit"
+              class="flex items-center bg-black shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold text-white hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
+              [disabled]="true">
+              <span>Send</span>
+              <span class="ml-2">
+                <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <button (click)="true"
+              class="inline-block  shrink-0 rounded-3xl border border-gray-300 mx-1 px-6 py-2 text-sm font-semibold hover:bg-gray-400 hover:text-white focus:outline-none active:text-white disabled:cursor-not-allowed">
+              cancel
           </button>
         </div>
       </div>
