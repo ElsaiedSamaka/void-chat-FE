@@ -1,56 +1,55 @@
-<div class="private-list px-3" [ngClass]="theme == 'dark'?' text-dark-secondary':'  text-light-secondary'">
+<div class="private-list px-3" [ngClass]="theme == ''?' text--secondary':'  text-light-secondary'">
   <div class="flex flex-row items-center justify-between text-xs mt-6">
     <span class="font-bold">Private</span>
-  <div class="flex items-center space-x-2">
-    <span [ngClass]="theme == 'dark'?' bg-dark-accent text-gray-50':' bg-gray-50 text-light-secondary'"
-      class="flex items-center justify-center  h-5 w-5 rounded-full">{{contacts.length}}</span>
-        <svg (click)="toggleSearchInput()" class="w-6 h-6  hover:text-green-400 hover:cursor-pointer" fill="none"
-          stroke="currentColor" stroke-width="1.5"
-          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
-          </path>
-        </svg>
-        </div>
+    <div class="flex items-center space-x-2">
+      <span [ngClass]="theme == ''?' bg--accent text-gray-50':' bg-gray-50 text-light-secondary'"
+        class="flex items-center justify-center  h-5 w-5 rounded-full">{{contacts.length}}</span>
+      <svg (click)="toggleSearchInput()" class="w-6 h-6  hover:text-green-400 hover:cursor-pointer" fill="none"
+        stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
+        </path>
+      </svg>
+    </div>
   </div>
   <div class=" mt-4 -mx-2">
     <div class="flex items-center justify-around" *ngIf="showSearchInput">
-    <input type="search"
-      class="p-2 m-4 w-4/5 h-full rounded-xl !border-1  border-green-100 ring-green-300 focus:outline-green-500"
-      [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
-      placeholder="search your contacts.." [autofocus]="true">
+      <input type="search"
+        class="p-2 m-4 w-4/5 h-full rounded-xl !border-1  border-green-100 ring-green-300 focus:outline-green-500"
+        [ngClass]="theme == ''?' bg--accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
+        placeholder="search your contacts.." [autofocus]="true">
       <div class="new-chat relative">
         <svg class=" w-5 h-5 hover:cursor-pointer hover:text-green-400" (mouseenter)="toggleToolTip()"
-          (mouseleave)="toggleToolTip()" fill="none"
-          stroke="currentColor" stroke-width="1.5"
-    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round"
-      d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z">
-    </path>
-  </svg>
-  <!-- Tooltip -->
-  <div id="tooltip-right" role="tooltip" *ngIf="showNewChatTooltip"
-    class="absolute z-10  top-0 left-5 inline-block px-3 py-2 text-sm font-medium text-black bg-gray-50 rounded-lg shadow-md  tooltip ">
-    chat with new contact
-    <div class="tooltip-arrow" data-popper-arrow></div>
-  </div>
-  </div>
+          (mouseleave)="toggleToolTip()" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z">
+          </path>
+        </svg>
+        <!-- Tooltip -->
+        <div id="tooltip-right" role="tooltip" *ngIf="showNewChatTooltip"
+          class="absolute z-10  top-0 left-5 inline-block px-3 py-2 text-sm font-medium text-black bg-gray-50 rounded-lg shadow-md  tooltip ">
+          chat with new contact
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </div>
     </div>
     <div class="flex flex-col space-y-1 h-52 overflow-scroll">
       <ng-container *ngIf="contacts.length >0; else nocontacteduser">
-    <div class="flex flex-row items-center  hover:bg-gray-400 hover:cursor-pointer rounded-xl p-2"
-      [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-gray-50 text-light-secondary'"
-      *ngFor="let contact of contacts" (click)="selecteContact(contact)">
-      <div [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white text-light-secondary'"
-        class="flex items-center justify-center h-8 w-8 border-1 border-gray-900  rounded-full">
-        {{contact.id}}
-      </div>
-      <div class="ml-2  font-semibold">{{contact.username}}</div>
-    </div>
-    </ng-container>
-    <ng-template #nocontacteduser>
-      No contacted users yet
-    </ng-template>
+        <div class="flex flex-row items-center  hover:bg-gray-400 hover:cursor-pointer rounded-xl p-2"
+          [ngClass]="theme == ''?'bg--primary text--secondary':'bg-gray-50 text-light-secondary'"
+          *ngFor="let contact of contacts" (click)="selecteContact(contact)">
+          <div [ngClass]="theme == ''?'bg--accent text--secondary':'bg-white text-light-secondary'"
+            class="flex items-center justify-center h-8 w-8 border-1 border-gray-900  rounded-full">
+            {{contact.id}}
+          </div>
+          <div class="ml-2  font-semibold">{{contact.username}}</div>
+          </div>
+          </ng-container>
+          <ng-template #nocontacteduser>
+            No contacted users yet
+          </ng-template>
     </div>
   </div>
 </div>
@@ -77,34 +76,47 @@
   <div modal-body>
     <form [formGroup]="" (ngSubmit)="true">
       <div
-        class="p-5 mt-4 border-2 border-gray-200 border-dashed border-b-0 w-full h-full grid grid-rows-2 grid-cols-2 gap-2 justify-end rounded-t-3xl">
-        <div class="flex items-center space-x-2 col-span-2 ">
+        class="p-5 mt-4 border-2 border-gray-200 border-dashed border-b-0 w-full h-full   justify-end rounded-t-3xl">
+        <div class="flex items-center space-x-2 w-full">
           <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
           <input type="search" name="users" id="users" class="w-full px-4 py-2 rounded-xl">
         </div>
-        <div class="flex flex-col">
-
+        <!-- Dropdown menu -->
+        <div id="dropdownSearch" class="z-10  bg-white rounded-xl shadow w-60 ">
+          <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
+            <li>
+              <div class="flex items-center pl-2 rounded hover:bg-gray-100 ">
+                <input id="checkbox-item-11" type="checkbox" value=""
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
+                <label for="checkbox-item-11"
+                  class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded :text-gray-300">Bonnie Green</label>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center pl-2 rounded hover:bg-gray-100 :hover:bg-gray-600">
+                <input checked id="checkbox-item-12" type="checkbox" value=""
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 :focus:ring-blue-600 :ring-offset-gray-700 :focus:ring-offset-gray-700 focus:ring-2 :bg-gray-600 :border-gray-500">
+                <label for="checkbox-item-12" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded :text-gray-300">Jese
+                  Leos</label>
+              </div>
+            </li>
+            </ul>
         </div>
-        <div class="flex flex-col">
-
-        </div>
-        <div class="flex flex-col">
-
-        </div>
-        <div class="flex flex-col col-span-2">
-          <label class="text-sm font-semibold text-gray-900 mb-2"> الوصف</label>
+        <div class="flex flex-col w-full">
+          <label class="text-sm font-semibold text-gray-900 mb-2"> Message</label>
+          <textarea name="message" id="message" cols="30" rows="3"></textarea>
         </div>
       </div>
       <div class="flex flex-col p-2 border-2 border-gray-200 border-dashed border-t-0 w-full h-full rounded-b-3xl">
-        <div class="flex justify-start">
+        <div class="flex flex-row-reverse justify-start">
           <button (click)="true"
             class="inline-block  shrink-0 rounded-3xl border border-gray-300 mx-1 px-6 py-2 text-sm font-semibold hover:bg-gray-400 hover:text-white focus:outline-none active:text-white disabled:cursor-not-allowed">
-            الغاء
+            cancel
           </button>
           <button type="submit"
             class="inline-block bg-black shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold text-white hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
             [disabled]="true">
-            تأكيد
+Send
           </button>
         </div>
       </div>
