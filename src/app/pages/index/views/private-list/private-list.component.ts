@@ -81,4 +81,7 @@ export class PrivateListComponent implements OnInit {
       this.getUsers();
     }
   }
+  handleUserSelect(target) {
+    console.log('user selected', target.value);
+  }
 }

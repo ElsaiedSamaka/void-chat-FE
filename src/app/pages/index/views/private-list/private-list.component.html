@@ -45,11 +45,11 @@
             {{contact.id}}
           </div>
           <div class="ml-2  font-semibold">{{contact.username}}</div>
-          </div>
-          </ng-container>
-          <ng-template #nocontacteduser>
-            No contacted users yet
-          </ng-template>
+        </div>
+        </ng-container>
+        <ng-template #nocontacteduser>
+          No contacted users yet
+        </ng-template>
     </div>
   </div>
 </div>
@@ -69,7 +69,7 @@
         <span class="sr-only">Close modal</span>
       </button>
       <h3 class="text-xl font-semibold text-gray-900 ">
-      chat with..
+        chat with..
       </h3>
     </div>
   </div>
@@ -77,38 +77,37 @@
     <form [formGroup]="" (ngSubmit)="true">
       <div
         class="p-5 mt-4 border-2 border-gray-200 border-dashed border-b-0 w-full h-full grid grid-cols-1 grid-rows-1 gap-2 rounded-t-3xl">
-      <div class="flex flex-wrap items-center space-x-2 w-full">
-        <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
-        <div
-          class="relative items-center px-5 py-2 text-sm font-semibold text-center text-gray-950 bg-green-100 border border-gray-100 rounded-xl">
-          username
+        <div class="flex flex-wrap items-center space-x-2 w-full">
+          <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
           <div
-            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 :border-gray-900">
-            X
+            class="relative items-center px-5 py-2 text-sm font-semibold text-center text-gray-950 bg-green-100 border border-gray-100 rounded-xl">
+            username
+            <div
+              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 :border-gray-900">
+              X
             </div>
-        </div>
-        <div class="search-users relative flex-grow">
-          <input type="search" name="users" id="users" class="w-full px-4 py-2 rounded-xl !border-2 !border-gray-100"
-          autofocus>
-          <!-- Dropdown menu -->
-          <div id="dropdownSearch" class="absolute  z-10  bg-white rounded-xl shadow w-60 ">
-            <ul class="h-44 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
-              <ng-container *ngIf="users.length > 0;else nousersfound">
-                <li *ngFor="let user of users">
-                <div class="flex items-center pl-2 rounded hover:bg-gray-100 ">
-                  <input id="checkbox-item" type="checkbox" [value]="user.id"
-                    class="sr-only w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
-                  <label for="checkbox-item" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded ">{{user.username}}</label>
-                  </div>
+          </div>
+          <div class="search-users relative flex-grow">
+            <input type="search" name="users" id="users" class="w-full px-4 py-2 rounded-xl !border-2 !border-gray-100" autofocus>
+            <!-- Dropdown menu -->
+            <div id="dropdownSearch" class="absolute  z-10  bg-white rounded-xl shadow w-60 ">
+              <ul class="h-44 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
+                <ng-container *ngIf="users.length > 0;else nousersfound">
+                  <li *ngFor="let user of users">
+                    <div class="flex items-center pl-2 rounded hover:bg-gray-100 ">
+                      <input [name]="user.id" [id]="user.id" [value]="user.id" type="checkbox" (change)="handleUserSelect($event.target)"
+                        class="sr-only w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
+                      <label [for]="user.id" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded ">{{user.username}}</label>
+                      </div>
                   </li>
-                  </ng-container>
-                  <ng-template #nousersfound>
-                    No users found
-                  </ng-template>
-            </ul>
+                </ng-container>
+                <ng-template #nousersfound>
+                  No users found
+                </ng-template>
+                </ul>
+                </div>
           </div>
-          </div>
-          </div>
+        </div>
         <div class="flex w-full space-x-2">
           <label class="text-sm font-semibold text-gray-900 mb-2"> Message</label>
           <textarea name="message" id="message" class="p-2 rounded-xl w-full !border-2 !border-gray-100" cols="30"
@@ -117,22 +116,22 @@
       </div>
       <div class="flex flex-col p-2 border-2 border-gray-200 border-dashed border-t-0 w-full h-full rounded-b-3xl">
         <div class="flex flex-row-reverse justify-start">
-            <button type="submit"
-              class="flex items-center bg-black shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold text-white hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
-              [disabled]="true">
-              <span>Send</span>
-              <span class="ml-2">
-                <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5">
-                  </path>
-                </svg>
-              </span>
-            </button>
-            <button (click)="toggleModel()"
-              class="inline-block  shrink-0 rounded-3xl border border-gray-300 mx-1 px-6 py-2 text-sm font-semibold hover:bg-gray-400 hover:text-white focus:outline-none active:text-white disabled:cursor-not-allowed">
-              cancel
+          <button type="submit"
+            class="flex items-center bg-black shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold text-white hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
+            [disabled]="true">
+            <span>Send</span>
+            <span class="ml-2">
+              <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5">
+                </path>
+              </svg>
+            </span>
+          </button>
+          <button (click)="toggleModel()"
+            class="inline-block  shrink-0 rounded-3xl border border-gray-300 mx-1 px-6 py-2 text-sm font-semibold hover:bg-gray-400 hover:text-white focus:outline-none active:text-white disabled:cursor-not-allowed">
+            cancel
           </button>
         </div>
       </div>
