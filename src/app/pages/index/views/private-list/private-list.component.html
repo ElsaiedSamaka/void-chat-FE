@@ -54,10 +54,10 @@
     </div>
   </div>
 </div>
-<!-- edit product modal  -->
+<!-- new chat modal  -->
 <app-modal *ngIf="true">
   <div modal-header>
-    <div class="flex justify-between ">
+    <div class="flex flex-row-reverse justify-between ">
       <button type="button"
         class=" text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-3xl text-sm p-1.5  inline-flex items-center"
         data-modal-hide="popup-modal">
@@ -70,7 +70,7 @@
         <span class="sr-only">Close modal</span>
       </button>
       <h3 class="text-xl font-semibold text-gray-900 ">
-        تعديل منتج
+        new chat
       </h3>
     </div>
   </div>
@@ -78,15 +78,9 @@
     <form [formGroup]="" (ngSubmit)="true">
       <div
         class="p-5 mt-4 border-2 border-gray-200 border-dashed border-b-0 w-full h-full grid grid-rows-2 grid-cols-2 gap-2 justify-end rounded-t-3xl">
-        <div class="flex flex-col">
-          <!-- TODO: make sure that categories are loaded from the server -->
-          <label class="text-sm font-semibold text-gray-900 mb-2">الفئة </label>
-          <select name="category" id="category" class="border border-gray-300 rounded-3xl p-2"
-            formControlName="category">
-            <option value="1">Mens</option>
-            <option value="2">Womens</option>
-            <option value="3">Kids</option>
-          </select>
+        <div class="flex items-center space-x-2 col-span-2 ">
+          <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
+          <input type="search" name="users" id="users" class="w-full px-4 py-2 rounded-xl">
         </div>
         <div class="flex flex-col">
 
@@ -99,7 +93,6 @@
         </div>
         <div class="flex flex-col col-span-2">
           <label class="text-sm font-semibold text-gray-900 mb-2"> الوصف</label>
-          <textarea formControlName="description" class="border border-gray-300 rounded-3xl p-2 text-right"></textarea>
         </div>
       </div>
       <div class="flex flex-col p-2 border-2 border-gray-200 border-dashed border-t-0 w-full h-full rounded-b-3xl">
