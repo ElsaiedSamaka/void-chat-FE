@@ -80,8 +80,9 @@
         <div class="flex flex-wrap items-center space-x-2 w-full">
           <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
           <div
+          *ngFor="let user of selectedUsers"
             class="relative items-center px-5 py-2 text-sm font-semibold text-center text-gray-950 bg-green-100 border border-gray-100 rounded-xl">
-            username
+            {{user.username}}
             <div
               class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 :border-gray-900">
               X
@@ -95,8 +96,9 @@
                 <ng-container *ngIf="users.length > 0;else nousersfound">
                   <li *ngFor="let user of users">
                     <div class="flex items-center pl-2 rounded hover:bg-gray-100 ">
-                      <input [name]="user.id" [id]="user.id" [value]="user.id" type="checkbox" (change)="handleUserSelect($event.target)"
-                        class="sr-only w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
+                      <input [name]="user.id" [id]="user.id" [value]="user.id" type="checkbox" [checked]="user.isSelected"
+                        (change)="handleUserSelect($event)"
+                        class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
                       <label [for]="user.id" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded ">{{user.username}}</label>
                       </div>
                   </li>

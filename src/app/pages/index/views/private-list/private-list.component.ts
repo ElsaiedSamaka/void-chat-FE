@@ -56,10 +56,14 @@ export class PrivateListComponent implements OnInit {
   getUsers() {
     this.userService.getUsers().subscribe({
       next: (users) => {
-        this.users = users;
+        this.users = users.map((user) => ({
+          ...user,
+          isSelected: false,
+        }));
+        console.log('this.users', this.users);
       },
       error: (err) => {
-        console.log('error while retreiveing users', err);
+        console.log('error while retrieving users', err);
       },
       complete: () => {},
     });
@@ -81,7 +85,19 @@ export class PrivateListComponent implements OnInit {
       this.getUsers();
     }
   }
-  handleUserSelect(target) {
-    console.log('user selected', target.value);
+  handleUserSelect(event) {
+    const userId = event.target.value;
+    const isChecked = event.target.checked;
+    const user = this.users.find((u) => u.id == userId);
+    console.log('user', user);
+    if (isChecked) {
+      this.selectedUsers.push(user);
+    } else {
+      const index = this.selectedUsers.findIndex((u) => u.id == userId);
+      if (index !== -1) {
+        this.selectedUsers.splice(index, 1);
+      }
+    }
+    console.log('selectedUsers', this.selectedUsers);
   }
 }
