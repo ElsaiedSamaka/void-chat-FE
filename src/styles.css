@@ -12,8 +12,6 @@ body{
 * {
   margin: 0;
   padding: 0;
-  border-width: 0px;
-  border-style: none;
   scrollbar-width: thin;
   scrollbar-color: gray white;
 }
