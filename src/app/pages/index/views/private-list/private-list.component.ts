@@ -12,6 +12,7 @@ import { SharedService } from '../../services/shared.service';
 })
 export class PrivateListComponent implements OnInit {
   users: any[] = [];
+  selectedUsers: any[] = [];
   contacts: any[] = [];
   selectedContact: any;
   theme: string = '';
@@ -28,7 +29,6 @@ export class PrivateListComponent implements OnInit {
 
   ngOnInit() {
     // TODO: we gonna call this below method on searching or getting all users
-    // this.getUsers();
     this.getContactedUsers();
     this.getCurrentTheme();
   }
@@ -55,7 +55,9 @@ export class PrivateListComponent implements OnInit {
   }
   getUsers() {
     this.userService.getUsers().subscribe({
-      next: (users) => {},
+      next: (users) => {
+        this.users = users;
+      },
       error: (err) => {
         console.log('error while retreiveing users', err);
       },
@@ -75,5 +77,8 @@ export class PrivateListComponent implements OnInit {
   }
   toggleModel() {
     this.showModal = !this.showModal;
+    if (this.showModal) {
+      this.getUsers();
+    }
   }
 }
