@@ -93,13 +93,18 @@
           <!-- Dropdown menu -->
           <div id="dropdownSearch" class="absolute  z-10  bg-white rounded-xl shadow w-60 ">
             <ul class="h-44 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
-              <li>
+              <ng-container *ngIf="users.length > 0;else nousersfound">
+                <li *ngFor="let user of users">
                 <div class="flex items-center pl-2 rounded hover:bg-gray-100 ">
-                  <input id="checkbox-item" type="checkbox" value=""
+                  <input id="checkbox-item" type="checkbox" [value]="user.id"
                     class="sr-only w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
-                  <label for="checkbox-item" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded ">Bonnie Green</label>
+                  <label for="checkbox-item" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded ">{{user.username}}</label>
                   </div>
                   </li>
+                  </ng-container>
+                  <ng-template #nousersfound>
+                    No users found
+                  </ng-template>
             </ul>
           </div>
           </div>
