@@ -68,7 +68,7 @@
     </div>
   </div>
   <div modal-body>
-    <form [formGroup]="" (ngSubmit)="true">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div
         class="p-5 mt-4 border-2 border-gray-200 border-dashed border-b-0 w-full h-full grid grid-cols-1 grid-rows-1 gap-2 rounded-t-3xl">
         <div class="flex flex-wrap items-center space-x-2 w-full">
@@ -112,7 +112,8 @@
         </div>
         <div class="flex w-full space-x-2">
           <label class="text-sm font-semibold text-gray-900 mb-2"> Message</label>
-          <textarea name="message" id="message" class="p-2 rounded-xl w-full !border-2 !border-gray-100" cols="30"
+          <textarea formControlName="message" name="message" id="message" class="p-2 rounded-xl w-full !border-2 !border-gray-100"
+            cols="30"
             rows="3"></textarea>
         </div>
       </div>
@@ -120,7 +121,7 @@
         <div class="flex flex-row-reverse justify-start">
           <button type="submit"
             class="flex items-center bg-black shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold text-white hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
-            [disabled]="true">
+            [disabled]="myForm.invalid">
             <span>Send</span>
             <span class="ml-2">
               <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"

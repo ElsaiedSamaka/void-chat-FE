@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
@@ -33,6 +34,14 @@ export class PrivateListComponent implements OnInit {
     this.getContactedUsers();
     this.getCurrentTheme();
     this.handleDropDown();
+  }
+  myForm = new FormGroup({
+    message: new FormControl(''),
+  });
+  onSubmit() {
+    if (this.myForm.invalid) return;
+    //send message
+    console.log("form value",this.myForm.value)
   }
   selecteContact(contact: any) {
     this.selectedContact = contact;
