@@ -84,7 +84,8 @@
             </div>
           </div>
           <div class="search-users relative flex-grow">
-            <input (input)="showDropdown = true" type="search" name="users" id="users"
+            <input (input)="showDropdown = true" type="search" name="users" id="users" [(ngModel)]="email"
+              (input)="handleEmailChange()" [ngModelOptions]="{standalone: true}"
               class="w-full px-4 py-2 rounded-xl !border-2 !border-gray-100" autofocus>
             <!-- Dropdown menu -->
             <div *ngIf="showDropdown" id="dropdownSearch" class="absolute  z-10  bg-white rounded-xl shadow w-60 ">

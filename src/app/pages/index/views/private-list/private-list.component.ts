@@ -19,6 +19,7 @@ export class PrivateListComponent implements OnInit {
   showSearchInput: boolean = false;
   showModal: boolean = false;
   showDropdown: boolean = false;
+  email: string = '';
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
@@ -54,7 +55,7 @@ export class PrivateListComponent implements OnInit {
     });
   }
   getUsers() {
-    this.userService.getUsers().subscribe({
+    this.userService.getUsers(this.email).subscribe({
       next: (users) => {
         this.users = users.map((user) => ({
           ...user,
@@ -86,7 +87,6 @@ export class PrivateListComponent implements OnInit {
     const userId = event.target.value;
     const isChecked = event.target.checked;
     const user = this.users.find((u) => u.id == userId);
-    console.log('user', user);
     if (isChecked) {
       this.selectedUsers.push(user);
     } else {
@@ -114,5 +114,8 @@ export class PrivateListComponent implements OnInit {
   }
   removeSelectedUser(i: number) {
     this.selectedUsers.splice(i, 1);
+  }
+  handleEmailChange() {
+    console.log('email', this.email);
   }
 }
