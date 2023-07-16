@@ -74,10 +74,11 @@
         <div class="flex flex-wrap items-center space-x-2 w-full">
           <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
           <div
-          *ngFor="let user of selectedUsers"
+          *ngFor="let user of selectedUsers; let i = index"
             class="relative items-center px-5 py-2 text-sm font-semibold text-center text-gray-950 bg-green-100 border border-gray-100 rounded-xl">
             {{user.username}}
             <div
+            (click)="removeSelectedUser(i)"
               class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 :border-gray-900">
               X
             </div>

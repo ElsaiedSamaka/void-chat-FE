@@ -112,4 +112,7 @@ export class PrivateListComponent implements OnInit {
       }
     });
   }
+  removeSelectedUser(i: number) {
+    this.selectedUsers.splice(i, 1);
+  }
 }
