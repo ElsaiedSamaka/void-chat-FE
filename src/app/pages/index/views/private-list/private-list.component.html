@@ -98,7 +98,7 @@
                     <div class="flex items-center pl-2 rounded hover:bg-gray-100 ">
                       <input [name]="user.id" [id]="user.id" [value]="user.id" type="checkbox" [checked]="user.isSelected"
                         (change)="handleUserSelect($event)"
-                        class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
+                        class="sr-only w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
                       <label [for]="user.id" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded ">{{user.username}}</label>
                       </div>
                   </li>
