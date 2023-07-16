@@ -52,7 +52,8 @@
   <div modal-header>
     <div class="flex flex-row-reverse justify-between ">
       <button type="button" (click)="toggleModel()"
-        class=" text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-3xl text-sm p-1.5  inline-flex items-center"
+        [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white text-light-secondary'"
+        class="  hover:bg-gray-200 hover:text-gray-900 rounded-3xl text-sm p-1.5  inline-flex items-center"
         data-modal-hide="popup-modal">
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg" (click)="true">
@@ -62,7 +63,7 @@
         </svg>
         <span class="sr-only">Close modal</span>
       </button>
-      <h3 class="text-xl font-semibold text-gray-900 ">
+      <h3 class="text-xl font-semibold" [ngClass]="theme == 'dark'?' text-dark-secondary':' text-light-secondary'">
         chat with..
       </h3>
     </div>
@@ -72,8 +73,8 @@
       <div
      
         class="p-5 mt-4 border-2 border-gray-200 border-dashed border-b-0 w-full h-full grid grid-cols-1 grid-rows-1 gap-2 rounded-t-3xl">
-        <div class="flex flex-wrap items-center space-x-2 w-full">
-          <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
+        <div [ngClass]="theme == 'dark'?' text-dark-secondary':' text-light-secondary'" class="flex flex-wrap items-center space-x-2 w-full">
+          <label for="users" class="text-sm font-semibold mb-2">To </label>
           <div
           *ngFor="let user of selectedUsers; let i = index"
             class="relative items-center px-5 py-2 text-sm font-semibold text-center text-gray-950 bg-green-100 border border-gray-100 rounded-xl">
