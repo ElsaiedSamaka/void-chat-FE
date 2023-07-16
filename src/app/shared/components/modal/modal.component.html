@@ -1,11 +1,10 @@
 <!-- Main modal -->
   <!-- dimmed bg  -->
-  <!-- <div class="fixed z-30 inset-0 hidden bg-gray-50 bg-opacity-0 transition-opacity md:block"></div> -->
+  <!-- <div class="fixed z-30 inset-0  bg-gray-600 bg-opacity-50 transition-opacity md:block"></div> -->
   <!-- blured bg  -->
   <div class="fixed z-30 inset-0 backdrop-blur-sm md:block" (click)="onDismissClick()"></div>
-
   <div
-   [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
+   [ngClass]="theme == 'dark'?' bg-dark-primary placeholder:text-gray-50 text-dark-secondary':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
     class="w-[50%] max-w-[40%]  z-40 fixed top-[15%] left-1/3 mx-auto rounded-3xl shadow-2xl  px-5 py-5 backdrop-blur-md" >
     <div class="flex flex-col w-full  ">
     <!-- Modal content -->

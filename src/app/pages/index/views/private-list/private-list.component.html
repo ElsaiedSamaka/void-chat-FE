@@ -48,7 +48,7 @@
   </div>
 </div>
 <!-- new chat modal  -->
-<app-modal *ngIf="showModal">
+<app-modal *ngIf="showModal" (dismiss)="toggleModel()">
   <div modal-header>
     <div class="flex flex-row-reverse justify-between ">
       <button type="button" (click)="toggleModel()"
@@ -70,6 +70,7 @@
   <div modal-body>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div
+     
         class="p-5 mt-4 border-2 border-gray-200 border-dashed border-b-0 w-full h-full grid grid-cols-1 grid-rows-1 gap-2 rounded-t-3xl">
         <div class="flex flex-wrap items-center space-x-2 w-full">
           <label for="users" class="text-sm font-semibold text-gray-900 mb-2">To </label>
