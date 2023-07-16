@@ -18,6 +18,7 @@ export class PrivateListComponent implements OnInit {
   theme: string = '';
   showSearchInput: boolean = false;
   showModal: boolean = false;
+  showDropdown: boolean = false;
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
@@ -27,9 +28,9 @@ export class PrivateListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // TODO: we gonna call this below method on searching or getting all users
     this.getContactedUsers();
     this.getCurrentTheme();
+    this.handleDropDown();
   }
   selecteContact(contact: any) {
     this.selectedContact = contact;
@@ -94,6 +95,21 @@ export class PrivateListComponent implements OnInit {
         this.selectedUsers.splice(index, 1);
       }
     }
-    console.log('selectedUsers', this.selectedUsers);
+  }
+  handleDropDown() {
+    document.addEventListener('click', (event) => {
+      const dropdown = document.getElementById('dropdownSearch');
+      const searchInput = document.getElementById('users') as HTMLInputElement;
+      if (dropdown) {
+        if (searchInput.value === '') {
+          this.showDropdown = false;
+        } else if (
+          !dropdown.contains(event.target as Node) &&
+          !searchInput.contains(event.target as Node)
+        ) {
+          this.showDropdown = false;
+        }
+      }
+    });
   }
 }

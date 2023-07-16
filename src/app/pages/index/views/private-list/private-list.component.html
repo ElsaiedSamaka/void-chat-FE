@@ -83,9 +83,10 @@
             </div>
           </div>
           <div class="search-users relative flex-grow">
-            <input type="search" name="users" id="users" class="w-full px-4 py-2 rounded-xl !border-2 !border-gray-100" autofocus>
+            <input (input)="showDropdown = true" type="search" name="users" id="users"
+              class="w-full px-4 py-2 rounded-xl !border-2 !border-gray-100" autofocus>
             <!-- Dropdown menu -->
-            <div id="dropdownSearch" class="absolute  z-10  bg-white rounded-xl shadow w-60 ">
+            <div *ngIf="showDropdown" id="dropdownSearch" class="absolute  z-10  bg-white rounded-xl shadow w-60 ">
               <div class="results p-2">
                 <h6 class="font-semibold">Results</h6>
               <ul class="h-44 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
