@@ -14,7 +14,7 @@ export class UsersService {
     private authService: AuthService
   ) {}
   getUsers(email: string): Observable<any[]> {
-    return this.apiService.get(`/api/users?email:${email}`).pipe(
+    return this.apiService.get(`/api/users?email=${email}`).pipe(
       tap((res) => {
         this.users$.next(res);
       })

@@ -87,13 +87,18 @@ export class PrivateListComponent implements OnInit {
     const userId = event.target.value;
     const isChecked = event.target.checked;
     const user = this.users.find((u) => u.id == userId);
+    const selectedIndex = this.selectedUsers.findIndex((u) => u.id == userId);
+
     if (isChecked) {
-      this.selectedUsers.push(user);
-    } else {
-      const index = this.selectedUsers.findIndex((u) => u.id == userId);
-      if (index !== -1) {
-        this.selectedUsers.splice(index, 1);
+      if (selectedIndex === -1) {
+        this.selectedUsers.push(user);
       }
+      this.showDropdown = false;
+    } else {
+      if (selectedIndex !== -1) {
+        this.selectedUsers.splice(selectedIndex, 1);
+      }
+      this.showDropdown = false;
     }
   }
   handleDropDown() {
