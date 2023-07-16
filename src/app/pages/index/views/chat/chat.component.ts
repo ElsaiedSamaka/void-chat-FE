@@ -53,11 +53,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   sendMessage() {
     try {
-      this.chatService.sendMessage(
-        this.currentUser.id,
-        this.selectedContact.id,
-        this.newMessage
-      );
+      if (this.newMessage != '')
+        this.chatService.sendMessage(
+          this.currentUser.id,
+          this.selectedContact.id,
+          this.newMessage
+        );
       this.newMessage = '';
     } catch (error) {
       console.log('error while sending message', error);
