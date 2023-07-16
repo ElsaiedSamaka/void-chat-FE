@@ -56,13 +56,13 @@
     <!-- Middle section with a search input -->
     <div class="flex-grow p-2">
       <input type="text" [(ngModel)]="newMessage" name="message" placeholder="say Hello.." [required]="true"
-        class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 "
+        class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
         [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'" />
     </div>
     <!-- Right section with a send button -->
     <div class="p-2">
-      <button type="submit"
-        class="flex items-center justify-center border border-green-600  hover:bg-gradient-to-br bg-gradient-to-br from-green-400 via-green-500 to-green-800 hover:cursor-pointer hover:text-gray-50 rounded-2xl text-white px-4 py-2  flex-shrink-0">
+      <button type="submit" [disabled]="newMessage == ''"
+        class="flex items-center justify-center border border-green-600  hover:bg-gradient-to-br bg-gradient-to-br from-green-400 via-green-500 to-green-800 hover:cursor-pointer hover:text-gray-50 rounded-2xl text-white px-4 py-2  flex-shrink-0 disabled:bg-gradient-to-br disabled:from-gray-200 disabled:to-gray-200 disabled:text-gray-900 disabled:border-gray-800 disabled:cursor-not-allowed">
         <span>Send</span>
         <span class="ml-2">
           <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
