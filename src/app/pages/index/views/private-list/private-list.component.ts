@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
@@ -55,19 +56,31 @@ export class PrivateListComponent implements OnInit {
     });
   }
   getUsers() {
-    this.userService.getUsers(this.email).subscribe({
-      next: (users) => {
-        this.users = users.map((user) => ({
-          ...user,
-          isSelected: false,
-        }));
-        console.log('this.users', this.users);
-      },
-      error: (err) => {
-        console.log('error while retrieving users', err);
-      },
-      complete: () => {},
-    });
+    this.userService
+      .getUsers(this.email)
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((users) => {
+          if (users.length > 10) {
+            users = users.slice(0, 10);
+          }
+          return of(users);
+        })
+      )
+      .subscribe({
+        next: (users) => {
+          this.users = users.map((user) => ({
+            ...user,
+            isSelected: false,
+          }));
+          console.log('this.users', this.users);
+        },
+        error: (err) => {
+          console.log('error while retrieving users', err);
+        },
+        complete: () => {},
+      });
   }
   getCurrentTheme() {
     this.themeService.theme$.subscribe((theme) => {
@@ -94,10 +107,12 @@ export class PrivateListComponent implements OnInit {
         this.selectedUsers.push(user);
       }
       this.showDropdown = false;
+      this.email = '';
     } else {
       if (selectedIndex !== -1) {
         this.selectedUsers.splice(selectedIndex, 1);
       }
+      this.email = '';
       this.showDropdown = false;
     }
   }
@@ -121,6 +136,6 @@ export class PrivateListComponent implements OnInit {
     this.selectedUsers.splice(i, 1);
   }
   handleEmailChange() {
-    console.log('email', this.email);
+    this.getUsers();
   }
 }
