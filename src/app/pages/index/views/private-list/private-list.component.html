@@ -2,7 +2,7 @@
   <div class="flex flex-row items-center justify-between text-xs mt-6">
     <span class="font-bold">Private</span>
     <div class="flex items-center space-x-2">
-      <span [ngClass]="theme == ''?' bg-dark-accent text-gray-50':' bg-gray-50 text-light-secondary'"
+      <span [ngClass]="theme == 'dark'?' bg-dark-accent text-gray-50':' bg-gray-50 text-light-secondary'"
         class="flex items-center justify-center  h-5 w-5 rounded-full">{{contacts.length}}</span>
       <svg (click)="toggleSearchInput()" class="w-6 h-6  hover:text-green-400 hover:cursor-pointer" fill="none"
         stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
