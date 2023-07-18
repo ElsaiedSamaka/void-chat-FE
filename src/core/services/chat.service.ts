@@ -38,16 +38,17 @@ export class ChatService {
     }
   }
 
-  sendMessage(senderId: number, recipientId: number, text: string) {
+  sendMessage(senderId: number, recipientIds: number[], text: string) {
+    console.log('senderId', senderId, 'recipientIds', recipientIds);
     this.socket.emit('sendMessage', {
       sender: senderId,
-      recipient: recipientId,
+      recipients: recipientIds,
       message: text,
     });
     this.socket.on('newMessage', (message) => {
-      if (!this.messages$.value.includes(message))
-        this.getMessages(senderId, recipientId);
-      // this.messages$.value.push(message);
+      if (!this.messages$.value.includes(message)) {
+        this.getMessages(senderId, message.recipientId);
+      }
     });
   }
 }

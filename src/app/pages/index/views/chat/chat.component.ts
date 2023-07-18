@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       if (this.newMessage != '')
         this.chatService.sendMessage(
           this.currentUser.id,
-          this.selectedContact.id,
+          [this.selectedContact.id],
           this.newMessage
         );
       this.newMessage = '';
