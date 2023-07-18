@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { io } from 'socket.io-client';
+import { SharedService } from 'src/app/pages/index/services/shared.service';
 import { environment } from 'src/environments/environment.prod';
 import { getCookie } from '../helper/getCookie';
 import { ApiService } from './api.service';
@@ -10,16 +11,21 @@ import { AuthService } from './auth.service';
 })
 export class ChatService {
   private socket: any;
-  user;
+  currentUser;
+  selectedContact;
   messages$ = new BehaviorSubject<any[]>([]);
 
   constructor(
     private authService: AuthService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private sharedService: SharedService
   ) {
     const token = getCookie('token');
     this.socket = io(environment.api_url, {
       query: { token, userId: this.authService.USER$.value.id },
+    });
+    this.sharedService.selectedContact$.subscribe((selectedContact) => {
+      this.selectedContact = selectedContact;
     });
   }
   getMessages(senderId: number, recipientId: number) {
@@ -39,15 +45,15 @@ export class ChatService {
   }
 
   sendMessage(senderId: number, recipientIds: number[], text: string) {
-    console.log('senderId', senderId, 'recipientIds', recipientIds);
     this.socket.emit('sendMessage', {
       sender: senderId,
       recipients: recipientIds,
       message: text,
     });
-    this.socket.on('newMessage', (message) => {
-      if (!this.messages$.value.includes(message)) {
-        this.getMessages(senderId, message.recipientId);
+    this.socket.on('newMessage', (newMessage) => {
+      if (!this.messages$.value.includes(newMessage)) {
+        console.log('newMessage', newMessage);
+        this.messages$.value.push(newMessage);
       }
     });
   }
