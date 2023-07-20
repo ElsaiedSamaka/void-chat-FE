@@ -1,16 +1,22 @@
 <div class="chat-container relative flex flex-col justify-between bg-gray-100 h-full w-full rounded-3xl  shadow-lg">
-<div class="flex items-center  p-5 text-xl  rounded-t-2xl"
-  [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
-  <div class="relative inline mx-2">
-    <img class="w-10 h-10 rounded-full" [src]="selectedContact?.user_img" alt="">
-    <span
-      class="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
+  <ng-container *ngIf="selectedContact;else nocontacteduser">
+  <div class="flex items-center  p-5 text-xl  rounded-t-2xl"
+    [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
+    <div class="relative">
+      <img class="w-10 h-10 rounded-full inline mx-2" [src]="selectedContact?.user_img" alt="">
+      <span class="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
+      <span class="text-2xl font-semibold ">{{selectedContact?.username}}</span>
+    </div>
   </div>
-  <span class="text-2xl font-semibold ">{{selectedContact?.username}}</span>
-</div>
-  <div class="p-2  overflow-y-scroll "
-    [ngClass]="theme == 'dark'?'bg-[#333333] ':''" #chatContainer>
-      <div class="grid grid-cols-12 gap-y-2">
+  </ng-container>
+  <ng-template #nocontacteduser>
+    <div class="flex items-center  p-5 text-xl  rounded-t-2xl"
+      [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
+      <span class="opacity-0">nocontacteduser</span>
+    </div>
+  </ng-template>
+  <div class="p-2 h-full overflow-y-scroll " [ngClass]="theme == 'dark'?'bg-[#333333] ':''" #chatContainer>
+    <div class="grid grid-cols-12 gap-y-2 ">
         <!-- Message template -->
         <ng-container *ngIf="messages.length >0; else nomessages">
         <div class=" p-3 rounded-2xl"
@@ -21,59 +27,62 @@
               [ngClass]=" message.sender.id === currentUser.id ?'flex items-center justify-center h-10 w-10 rounded-full bg-green-800 text-gray-100 flex-shrink-0':'flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white flex-shrink-0'">
               {{message.sender.username[0].toUpperCase()}}
             </div>
-      <div class="relative py-2 px-4 shadow rounded-2xl"
-        [class.text-[#fff]]="theme == 'dark' && message.sender.id !== currentUser.id"
-        [class.bg-white]="message.sender.id !== currentUser.id"
-        [class.text-[#fff]]="theme == 'dark' && message.sender.id == currentUser.id"
-        [class.bg-blue-900]="theme == 'dark' && message.sender.id == currentUser.id"
-        [class.text-[#eeeee]]="theme == 'light' && message.sender.id !== currentUser.id"
-        [class.text-[#eeeee]]="theme == 'light' && message.sender.id == currentUser.id"
-        [class.bg-blue-200]="theme == 'light' && message.sender.id == currentUser.id"
-        [class.mr-3]="message.sender.id === currentUser.id" [class.ml-3]="message.sender.id !== currentUser.id">
-        <div>{{message.message}}</div>
-      </div>
+            <div class="relative py-2 px-4 shadow rounded-2xl"
+              [class.text-[#fff]]="theme == 'dark' && message.sender.id !== currentUser.id"
+              [class.bg-white]="message.sender.id !== currentUser.id"
+              [class.text-[#fff]]="theme == 'dark' && message.sender.id == currentUser.id"
+              [class.bg-blue-900]="theme == 'dark' && message.sender.id == currentUser.id"
+              [class.text-[#eeeee]]="theme == 'light' && message.sender.id !== currentUser.id"
+              [class.text-[#eeeee]]="theme == 'light' && message.sender.id == currentUser.id"
+              [class.bg-blue-200]="theme == 'light' && message.sender.id == currentUser.id"
+              [class.mr-3]="message.sender.id === currentUser.id" [class.ml-3]="message.sender.id !== currentUser.id">
+              <div>{{message.message}}</div>
+            </div>
           </div>
         </div>
-        </ng-container>
-        <ng-template #nomessages>
-          test
+      </ng-container>
+      <ng-template #nomessages>
+        <div class="p-2 mx-auto col-span-full h-full">
+          <span class="text-2xl"> start a new conversation</span>
+          <span class="text-2xl"> 👋</span>
+        </div>
         </ng-template>
-      </div>
+        </div>
   </div>
   <div class="sender rounded-b-xl"
     [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
-  <form (ngSubmit)="sendMessage()" class="flex items-center justify-between z-10 space-x-4 rounded-xl  p-2 m-4 "
-    [ngClass]="theme == 'dark'?'bg-[#3333] text-dark-secondary':'bg-gray-100  text-light-secondary'">
-    <!-- Left section with a search icon -->
-    <div class="p-2">
-      <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-        </path>
-      </svg>
-    </div>
-    <!-- Middle section with a search input -->
-    <div class="flex-grow p-2">
-      <input type="text" [(ngModel)]="newMessage" name="message" placeholder="say Hello.." [required]="true"
-        class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-        [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'" />
-    </div>
-    <!-- Right section with a send button -->
-    <div class="p-2">
-      <button type="submit" [disabled]="newMessage == ''"
-        class="flex items-center justify-center border border-green-600  hover:bg-gradient-to-br bg-gradient-to-br from-green-400 via-green-500 to-green-800 hover:cursor-pointer hover:text-gray-50 rounded-2xl text-white px-4 py-2  flex-shrink-0 disabled:bg-gradient-to-br disabled:from-gray-200 disabled:to-gray-200 disabled:text-gray-900 disabled:border-gray-800 disabled:cursor-not-allowed">
-        <span>Send</span>
-        <span class="ml-2">
-          <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5">
-            </path>
-          </svg>
-        </span>
-      </button>
-    </div>
-  </form>
+    <form (ngSubmit)="sendMessage()" class="flex items-center justify-between z-10 space-x-4 rounded-xl  p-2 m-4 "
+      [ngClass]="theme == 'dark'?'bg-[#3333] text-dark-secondary':'bg-gray-100  text-light-secondary'">
+      <!-- Left section with a search icon -->
+      <div class="p-2">
+        <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+          </path>
+        </svg>
+      </div>
+      <!-- Middle section with a search input -->
+      <div class="flex-grow p-2">
+        <input type="text" [(ngModel)]="newMessage" name="message" placeholder="say Hello.." [required]="true"
+          class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
+          [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'" />
+      </div>
+      <!-- Right section with a send button -->
+      <div class="p-2">
+        <button type="submit" [disabled]="newMessage == ''"
+          class="flex items-center justify-center border border-green-600  hover:bg-gradient-to-br bg-gradient-to-br from-green-400 via-green-500 to-green-800 hover:cursor-pointer hover:text-gray-50 rounded-2xl text-white px-4 py-2  flex-shrink-0 disabled:bg-gradient-to-br disabled:from-gray-200 disabled:to-gray-200 disabled:text-gray-900 disabled:border-gray-800 disabled:cursor-not-allowed">
+          <span>Send</span>
+          <span class="ml-2">
+            <svg class="w-5 h-5 " fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5">
+              </path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </form>
   </div>
 </div>
