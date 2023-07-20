@@ -22,6 +22,8 @@ export class PrivateListComponent implements OnInit {
   showModal: boolean = false;
   showDropdown: boolean = false;
   email: string = '';
+  currentUser;
+
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
@@ -34,6 +36,7 @@ export class PrivateListComponent implements OnInit {
     this.getContactedUsers();
     this.getCurrentTheme();
     this.handleDropDown();
+    this.getCurrentUser();
   }
   myForm = new FormGroup({
     message: new FormControl('', Validators.required),
@@ -41,7 +44,17 @@ export class PrivateListComponent implements OnInit {
   onSubmit() {
     if (this.myForm.invalid) return;
     //send message
-    console.log('form value', this.myForm.value);
+    console.log('selectedContact', this.selectedUsers);
+    this.chatService.sendMessage(
+      this.currentUser.id,
+      [this.selectedUsers[0].id],
+      this.myForm.controls.message.value
+    );
+  }
+  getCurrentUser() {
+    this.authService.USER$.subscribe((res) => {
+      this.currentUser = res;
+    });
   }
   selecteContact(contact: any) {
     this.selectedContact = contact;

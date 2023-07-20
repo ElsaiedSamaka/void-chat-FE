@@ -27,6 +27,7 @@ export class ChatService {
     this.sharedService.selectedContact$.subscribe((selectedContact) => {
       this.selectedContact = selectedContact;
     });
+    this.socket.emit('join', { user: this.authService.USER$.value.id });
   }
   getMessages(senderId: number, recipientId: number) {
     try {
