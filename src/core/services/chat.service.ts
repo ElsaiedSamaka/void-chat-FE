@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, tap } from 'rxjs';
 import { Socket, io } from 'socket.io-client';
 import { SharedService } from 'src/app/pages/index/services/shared.service';
 import { environment } from 'src/environments/environment.prod';
@@ -50,9 +50,12 @@ export class ChatService {
       message: text,
     });
     this.socket.on('newMessage', (newMessage) => {
-      if (!this.messages$.value.includes(newMessage)) {
-        this.messages$.value.push(newMessage);
-      }
+      this.messages$
+        .pipe(
+          filter((messages) => !messages.includes(newMessage)),
+          tap((messages) => messages.push(newMessage))
+        )
+        .subscribe();
     });
   }
 
