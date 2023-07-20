@@ -53,6 +53,7 @@ export class PrivateListComponent implements OnInit {
     this.myForm.reset();
     this.toggleModel();
     this.getContactedUsers();
+    this.selectedUsers.length = 0;
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
@@ -77,15 +78,13 @@ export class PrivateListComponent implements OnInit {
         this.contacts = users;
         this.selectedContact = this.contacts[0]; // Initialize selectedContact with the first contact in the contacts array
         this.sharedService.selectedContact$.next(this.selectedContact); // Emit the initial value of selectedContact
-        this.chatService.joinRoom(
-          this.authService.USER$.value.id,
-          this.sharedService.selectedContact$.value.id
-        );
       },
       error: (err) => {
         console.log('error while retreiveing contacts', err);
       },
-      complete: () => {},
+      complete: () => {
+        console.log('contacts', this.contacts);
+      },
     });
   }
   getUsers() {
