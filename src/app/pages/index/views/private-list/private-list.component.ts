@@ -59,6 +59,10 @@ export class PrivateListComponent implements OnInit {
   selecteContact(contact: any) {
     this.selectedContact = contact;
     this.sharedService.selectedContact$.next(contact);
+     this.chatService.joinRoom(
+       this.authService.USER$.value.id,
+       this.sharedService.selectedContact$.value.id
+     );
     this.chatService.getMessages(
       this.authService.USER$.value.id,
       this.sharedService.selectedContact$.value.id
@@ -70,6 +74,10 @@ export class PrivateListComponent implements OnInit {
         this.contacts = users;
         this.selectedContact = this.contacts[0]; // Initialize selectedContact with the first contact in the contacts array
         this.sharedService.selectedContact$.next(this.selectedContact); // Emit the initial value of selectedContact
+        this.chatService.joinRoom(
+          this.authService.USER$.value.id,
+          this.sharedService.selectedContact$.value.id
+        );
       },
       error: (err) => {
         console.log('error while retreiveing contacts', err);

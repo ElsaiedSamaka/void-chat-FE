@@ -26,8 +26,8 @@ export class ChatService {
     });
     this.sharedService.selectedContact$.subscribe((selectedContact) => {
       this.selectedContact = selectedContact;
+      console.log(this.selectedContact);
     });
-    this.socket.emit('join', { userId: this.authService.USER$.value.id });
   }
   getMessages(senderId: number, recipientId: number) {
     try {
@@ -55,6 +55,20 @@ export class ChatService {
       if (!this.messages$.value.includes(newMessage)) {
         this.messages$.value.push(newMessage);
       }
+    });
+  }
+
+  joinRoom(userId, recipientId) {
+    this.socket.emit('join', {
+      userId: userId,
+      recipientId: recipientId,
+    });
+  }
+  
+  leaveRoom(userId, recipientId) {
+    this.socket.emit('leave', {
+      userId: userId,
+      recipientId: recipientId,
     });
   }
 }
