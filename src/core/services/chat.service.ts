@@ -26,12 +26,10 @@ export class ChatService {
     });
     this.sharedService.selectedContact$.subscribe((selectedContact) => {
       this.selectedContact = selectedContact;
-      console.log(this.selectedContact);
     });
   }
   getMessages(senderId: number, recipientId: number) {
     try {
-      console.log('senderId', senderId, 'recipientId', recipientId);
       this.socket.emit('getMessages', {
         sender: senderId,
         recipient: recipientId,

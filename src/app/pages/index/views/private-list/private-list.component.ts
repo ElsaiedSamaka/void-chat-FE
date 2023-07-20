@@ -104,7 +104,6 @@ export class PrivateListComponent implements OnInit {
             ...user,
             isSelected: false,
           }));
-          console.log('this.users', this.users);
         },
         error: (err) => {
           console.log('error while retrieving users', err);
