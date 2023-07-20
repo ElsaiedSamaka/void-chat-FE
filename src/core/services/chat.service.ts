@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { io } from 'socket.io-client';
+import { Socket, io } from 'socket.io-client';
 import { SharedService } from 'src/app/pages/index/services/shared.service';
 import { environment } from 'src/environments/environment.prod';
 import { getCookie } from '../helper/getCookie';
@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class ChatService {
-  private socket: any;
+  private socket: Socket;
   currentUser;
   selectedContact;
   messages$ = new BehaviorSubject<any[]>([]);
@@ -62,7 +62,7 @@ export class ChatService {
       recipientId: recipientId,
     });
   }
-  
+
   leaveRoom(userId, recipientId) {
     this.socket.emit('leave', {
       userId: userId,

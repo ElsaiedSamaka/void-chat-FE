@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  of,
+  pairwise,
+  switchMap,
+} from 'rxjs';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
@@ -23,7 +29,8 @@ export class PrivateListComponent implements OnInit {
   showDropdown: boolean = false;
   email: string = '';
   currentUser;
-
+  previousValue: any;
+  currentValue: any;
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
@@ -63,10 +70,22 @@ export class PrivateListComponent implements OnInit {
   selecteContact(contact: any) {
     this.selectedContact = contact;
     this.sharedService.selectedContact$.next(contact);
-     this.chatService.joinRoom(
-       this.authService.USER$.value.id,
-       this.sharedService.selectedContact$.value.id
-     );
+    this.sharedService.selectedContact$
+      .pipe(pairwise())
+      .subscribe(([previousValue, currentValue]) => {
+        this.previousValue = previousValue;
+        this.currentValue = currentValue;
+      });
+    this.chatService.leaveRoom(
+      this.authService.USER$.value.id,
+      this.previousValue.id
+    );
+    console.log('this.previousValue.id', this.previousValue.id);
+    this.chatService.joinRoom(
+      this.authService.USER$.value.id,
+      this.currentValue.id
+    );
+    console.log('this.currentValue.id', this.currentValue.id);
     this.chatService.getMessages(
       this.authService.USER$.value.id,
       this.sharedService.selectedContact$.value.id
