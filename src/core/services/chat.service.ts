@@ -4,7 +4,6 @@ import { Socket, io } from 'socket.io-client';
 import { SharedService } from 'src/app/pages/index/services/shared.service';
 import { environment } from 'src/environments/environment.prod';
 import { getCookie } from '../helper/getCookie';
-import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
@@ -17,7 +16,6 @@ export class ChatService {
 
   constructor(
     private authService: AuthService,
-    private apiService: ApiService,
     private sharedService: SharedService
   ) {
     const token = getCookie('token');
