@@ -27,7 +27,7 @@ export class ChatService {
     this.sharedService.selectedContact$.subscribe((selectedContact) => {
       this.selectedContact = selectedContact;
     });
-    this.socket.emit('join', { user: this.authService.USER$.value.id });
+    this.socket.emit('join', { userId: this.authService.USER$.value.id });
   }
   getMessages(senderId: number, recipientId: number) {
     try {
@@ -53,7 +53,6 @@ export class ChatService {
     });
     this.socket.on('newMessage', (newMessage) => {
       if (!this.messages$.value.includes(newMessage)) {
-        console.log('newMessage', newMessage);
         this.messages$.value.push(newMessage);
       }
     });
