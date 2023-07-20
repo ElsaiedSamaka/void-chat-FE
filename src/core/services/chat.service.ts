@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, filter, tap } from 'rxjs';
+import { BehaviorSubject, filter, tap } from 'rxjs';
 import { Socket, io } from 'socket.io-client';
 import { SharedService } from 'src/app/pages/index/services/shared.service';
 import { environment } from 'src/environments/environment.prod';
@@ -53,11 +53,7 @@ export class ChatService {
       this.messages$
         .pipe(
           filter((messages) => !messages.includes(newMessage)),
-          tap((messages) => messages.push(newMessage)),
-          catchError((error) => {
-            console.log('sendMessage error:', error);
-            return [];
-          })
+          tap((messages) => messages.push(newMessage))
         )
         .subscribe();
     });
