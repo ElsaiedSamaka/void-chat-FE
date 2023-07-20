@@ -51,8 +51,8 @@ export class PrivateListComponent implements OnInit {
       this.myForm.controls.message.value
     );
     this.myForm.reset();
-    this.toggleModel();
     this.getContactedUsers();
+    this.toggleModel();
     this.selectedUsers.length = 0;
   }
   getCurrentUser() {
@@ -82,9 +82,7 @@ export class PrivateListComponent implements OnInit {
       error: (err) => {
         console.log('error while retreiveing contacts', err);
       },
-      complete: () => {
-        console.log('contacts', this.contacts);
-      },
+      complete: () => {},
     });
   }
   getUsers() {
