@@ -44,12 +44,15 @@ export class PrivateListComponent implements OnInit {
   onSubmit() {
     if (this.myForm.invalid) return;
     //send message
-    console.log('selectedContact', this.selectedUsers);
+    console.log('selectedUsers', this.selectedUsers);
     this.chatService.sendMessage(
       this.currentUser.id,
       [this.selectedUsers[0].id],
       this.myForm.controls.message.value
     );
+    this.myForm.reset();
+    this.toggleModel();
+    this.getContactedUsers();
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
