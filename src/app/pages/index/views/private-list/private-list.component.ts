@@ -31,6 +31,7 @@ export class PrivateListComponent implements OnInit {
   currentUser;
   previousValue: any;
   currentValue: any;
+  myForm;
   constructor(
     private userService: UsersService,
     private sharedService: SharedService,
@@ -44,10 +45,12 @@ export class PrivateListComponent implements OnInit {
     this.getCurrentTheme();
     this.handleDropDown();
     this.getCurrentUser();
+    this.joinRoom();
+    this.myForm = new FormGroup({
+      message: new FormControl('', Validators.required),
+    });
   }
-  myForm = new FormGroup({
-    message: new FormControl('', Validators.required),
-  });
+
   onSubmit() {
     if (this.myForm.invalid) return;
     //send message
@@ -58,9 +61,9 @@ export class PrivateListComponent implements OnInit {
       this.myForm.controls.message.value
     );
     this.myForm.reset();
-    this.getContactedUsers();
-    this.toggleModel();
     this.selectedUsers.length = 0;
+    this.toggleModel();
+    this.getContactedUsers();
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
@@ -76,33 +79,31 @@ export class PrivateListComponent implements OnInit {
         this.previousValue = previousValue;
         this.currentValue = currentValue;
       });
-    this.chatService.leaveRoom(
-      this.authService.USER$.value.id,
-      this.previousValue.id
-    );
-    console.log('this.previousValue.id', this.previousValue.id);
-    this.chatService.joinRoom(
-      this.authService.USER$.value.id,
-      this.currentValue.id
-    );
-    console.log('this.currentValue.id', this.currentValue.id);
-    this.chatService.getMessages(
-      this.authService.USER$.value.id,
-      this.sharedService.selectedContact$.value.id
-    );
+
+    // console.log('this.previousValue.id', this.previousValue.id);
+    // console.log('this.currentValue.id', this.currentValue.id);
+    if (this.currentValue.id != this.previousValue.id) {
+      this.leaveRoom();
+    }
+    this.joinRoom();
+    this.getMessages();
   }
-  getContactedUsers() {
-    this.userService.getContactedUsers().subscribe({
-      next: (users) => {
-        this.contacts = users;
-        this.selectedContact = this.contacts[0]; // Initialize selectedContact with the first contact in the contacts array
-        this.sharedService.selectedContact$.next(this.selectedContact); // Emit the initial value of selectedContact
-      },
-      error: (err) => {
-        console.log('error while retreiveing contacts', err);
-      },
-      complete: () => {},
-    });
+
+  async getContactedUsers() {
+    try {
+      this.contacts = await this.userService.getContactedUsers().toPromise();
+      this.selectedContact = this.contacts[0];
+      this.sharedService.selectedContact$.next(this.selectedContact);
+    } catch (error) {
+      console.log('error while retrieving contacts', error);
+    }
+  }
+  getMessages() {
+    if (this.sharedService.selectedContact$.value.id)
+      this.chatService.getMessages(
+        this.authService.USER$.value.id,
+        this.sharedService.selectedContact$.value?.id
+      );
   }
   getUsers() {
     this.userService
@@ -185,5 +186,20 @@ export class PrivateListComponent implements OnInit {
   }
   handleEmailChange() {
     this.getUsers();
+  }
+  joinRoom() {
+    const selectedContact = this.selectedContact;
+    if (selectedContact) {
+      this.chatService.joinRoom(
+        this.authService.USER$.value.id,
+        this.sharedService.selectedContact$.value?.id
+      );
+    }
+  }
+  leaveRoom() {
+    this.chatService.leaveRoom(
+      this.authService.USER$.value.id,
+      this.previousValue.id
+    );
   }
 }

@@ -40,7 +40,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     });
     this.sharedService.selectedContact$.subscribe((selectedContact) => {
       this.selectedContact = selectedContact;
-      this.getMessages();
+        this.getMessages();
     });
     // get current user
     this.getCurrentUser();
@@ -66,11 +66,16 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   getMessages() {
-    this.chatService.getMessages(this.currentUser.id, this.selectedContact?.id);
-    // subscribe to messages$
-    this.chatService.messages$.subscribe((messages) => {
-      this.messages = messages;
-    });
+    if (this.sharedService.selectedContact$.value.id ) {
+      this.chatService.getMessages(
+        this.currentUser.id,
+        this.sharedService.selectedContact$.value.id
+      );
+      // subscribe to messages$
+      this.chatService.messages$.subscribe((messages) => {
+        this.messages = messages;
+      });
+    }
   }
 
   getCurrentUser() {
