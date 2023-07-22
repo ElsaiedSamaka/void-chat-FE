@@ -1,7 +1,7 @@
 <div class="chat-container relative flex flex-col justify-between bg-gray-100 h-full w-full rounded-3xl  shadow-lg">
   <ng-container *ngIf="selectedContact;else nocontacteduser">
-  <div class="flex items-center  p-5 text-xl  rounded-t-2xl"
-    [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
+  <div class="flex items-center  p-5 text-xl  rounded-t-2xl "
+    [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary ':'bg-white  text-light-secondary '">
     <div class="relative">
       <img class="w-10 h-10 rounded-full inline mx-2" [src]="selectedContact?.user_img" alt="">
       <span class="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
@@ -11,11 +11,11 @@
   </ng-container>
   <ng-template #nocontacteduser>
     <div class="flex items-center  p-5 text-xl  rounded-t-2xl"
-      [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
+      [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white  text-light-secondary'">
       <span class="opacity-0">nocontacteduser</span>
     </div>
   </ng-template>
-  <div class="p-2 h-full overflow-y-scroll " [ngClass]="theme == 'dark'?'bg-[#333333] ':''" #chatContainer>
+  <div class="p-2 h-full overflow-y-scroll " [ngClass]="theme == 'dark'?'bg-[#1e2022] ':''" #chatContainer>
     <div class="grid grid-cols-12 gap-y-2 ">
         <!-- Message template -->
         <ng-container *ngIf="messages.length >0; else nomessages">
@@ -50,7 +50,7 @@
         </div>
   </div>
   <div class="sender rounded-b-xl"
-    [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-white  text-light-secondary'">
+    [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white  text-light-secondary'">
     <form (ngSubmit)="sendMessage()" class="flex items-center justify-between z-10 space-x-4 rounded-xl  p-2 m-4 "
       [ngClass]="theme == 'dark'?'bg-[#3333] text-dark-secondary':'bg-gray-100  text-light-secondary'">
       <!-- Left section with a search icon -->
