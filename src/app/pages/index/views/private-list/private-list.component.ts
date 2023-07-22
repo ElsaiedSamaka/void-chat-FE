@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  of,
+  pairwise,
+  switchMap,
+} from 'rxjs';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
@@ -63,21 +69,24 @@ export class PrivateListComponent implements OnInit {
       this.currentUser = res;
     });
   }
-  selecteContact(contact: any) {
+  selectContact(contact: any) {
     this.selectedContact = contact;
     this.sharedService.selectedContact$.next(contact);
-    // this.sharedService.selectedContact$
-    //   .pipe(pairwise())
-    //   .subscribe(([previousValue, currentValue]) => {
-    //     this.previousValue = previousValue;
-    //     this.currentValue = currentValue;
-    //   });
+    this.sharedService.selectedContact$
+      .pipe(pairwise())
+      .subscribe(([previousValue, currentValue]) => {
+        this.previousValue = previousValue;
+        this.currentValue = currentValue;
+      });
 
-    // console.log('this.previousValue.id', this.previousValue.id);
-    // console.log('this.currentValue.id', this.currentValue.id);
-    // if (this.currentValue.id != this.previousValue.id) {
-    //   this.leaveRoom();
-    // }
+    console.log('this.previousValue.id', this.previousValue.id);
+    console.log('this.currentValue.id', this.currentValue.id);
+    if (this.currentValue.id != this.previousValue.id) {
+      this.leaveRoom();
+      this.joinRoom();
+    } else {
+      this.joinRoom();
+    }
     this.getMessages();
   }
 
@@ -183,9 +192,11 @@ export class PrivateListComponent implements OnInit {
   }
   joinRoom() {
     const selectedContact = this.selectedContact;
+    console.log('joinRoom called');
+    console.log(
+      `room:${this.authService.USER$.value.id}-${selectedContact.id}`
+    );
     if (selectedContact) {
-      console.log('joined');
-      console.log('selectedContact', selectedContact);
       this.chatService.joinRoom(
         this.authService.USER$.value.id,
         selectedContact.id
@@ -193,9 +204,15 @@ export class PrivateListComponent implements OnInit {
     }
   }
   leaveRoom() {
-    this.chatService.leaveRoom(
-      this.authService.USER$.value.id,
-      this.previousValue.id
+    console.log('leaveRoom called');
+    console.log(
+      `room:${this.authService.USER$.value.id}-${this.previousValue.id}`
     );
+    if (this.previousValue.id) {
+      this.chatService.leaveRoom(
+        this.authService.USER$.value.id,
+        this.previousValue.id
+      );
+    }
   }
 }

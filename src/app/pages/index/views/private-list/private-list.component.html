@@ -33,7 +33,7 @@
       <ng-container *ngIf="contacts.length >0; else nocontacteduser">
         <div class="flex flex-row items-center  hover:bg-gray-400 hover:cursor-pointer rounded-xl p-2"
           [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-gray-50 text-light-secondary'"
-          *ngFor="let contact of contacts" (click)="selecteContact(contact)">
+          *ngFor="let contact of contacts" (click)="selectContact(contact)">
           <div [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white text-light-secondary'"
             class="flex items-center justify-center h-8 w-8 border-1 border-gray-900  rounded-full">
             {{contact.id}}
