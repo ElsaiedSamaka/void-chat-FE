@@ -52,6 +52,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   sendMessage() {
+    console.log('this.selectedContact.id', this.selectedContact.id);
     try {
       if (this.newMessage != '')
         this.chatService.sendMessage(

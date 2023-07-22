@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  of,
-  pairwise,
-  switchMap,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
@@ -38,14 +32,14 @@ export class PrivateListComponent implements OnInit {
     private chatService: ChatService,
     private authService: AuthService,
     private themeService: ThemeService
-  ) {}
+  ) {
+    this.getContactedUsers();
+  }
 
   ngOnInit() {
-    this.getContactedUsers();
     this.getCurrentTheme();
     this.handleDropDown();
     this.getCurrentUser();
-    this.joinRoom();
     this.myForm = new FormGroup({
       message: new FormControl('', Validators.required),
     });
@@ -72,27 +66,28 @@ export class PrivateListComponent implements OnInit {
   selecteContact(contact: any) {
     this.selectedContact = contact;
     this.sharedService.selectedContact$.next(contact);
-    this.sharedService.selectedContact$
-      .pipe(pairwise())
-      .subscribe(([previousValue, currentValue]) => {
-        this.previousValue = previousValue;
-        this.currentValue = currentValue;
-      });
+    // this.sharedService.selectedContact$
+    //   .pipe(pairwise())
+    //   .subscribe(([previousValue, currentValue]) => {
+    //     this.previousValue = previousValue;
+    //     this.currentValue = currentValue;
+    //   });
 
     // console.log('this.previousValue.id', this.previousValue.id);
     // console.log('this.currentValue.id', this.currentValue.id);
-    if (this.currentValue.id != this.previousValue.id) {
-      this.leaveRoom();
-    }
-    this.joinRoom();
+    // if (this.currentValue.id != this.previousValue.id) {
+    //   this.leaveRoom();
+    // }
     this.getMessages();
   }
 
   async getContactedUsers() {
+    console.log('getContactedUsers called');
     try {
       this.contacts = await this.userService.getContactedUsers().toPromise();
       this.selectedContact = this.contacts[0];
       this.sharedService.selectedContact$.next(this.selectedContact);
+      this.joinRoom();
     } catch (error) {
       console.log('error while retrieving contacts', error);
     }
@@ -189,9 +184,11 @@ export class PrivateListComponent implements OnInit {
   joinRoom() {
     const selectedContact = this.selectedContact;
     if (selectedContact) {
+      console.log('joined');
+      console.log('selectedContact', selectedContact);
       this.chatService.joinRoom(
         this.authService.USER$.value.id,
-        this.sharedService.selectedContact$.value?.id
+        selectedContact.id
       );
     }
   }
