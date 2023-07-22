@@ -123,7 +123,8 @@
       <div class="flex flex-col p-2 border-2 border-gray-200 border-dashed border-t-0 w-full h-full rounded-b-3xl">
         <div class="flex flex-row-reverse justify-start">
           <button type="submit"
-            class="flex items-center bg-black shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold text-white hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
+            [ngClass]="theme == 'dark'?'bg-dark-primary text-dark-secondary':'bg-light-primary text-light-secondary'"
+            class="flex items-center shrink-0 rounded-3xl mx-1 px-6 py-1 text-sm font-semibold  hover:text-gray-50 focus:outline-none active:text-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
             [disabled]="myForm.invalid">
             <span>Send</span>
             <span class="ml-2">
