@@ -54,19 +54,25 @@
     <form (ngSubmit)="sendMessage()" class="flex items-center justify-between z-10 space-x-4 rounded-xl  p-2 m-4 "
       [ngClass]="theme == 'dark'?'bg-[#3333] text-dark-secondary':'bg-gray-100  text-light-secondary'">
       <!-- Left section with a search icon -->
-      <div class="p-2">
+      <div class="p-2 inline-flex space-x-2">
         <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
           </path>
         </svg>
+        <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" stroke-width="1.5"
+          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z">
+          </path>
+        </svg>
       </div>
-      <!-- Middle section with a search input -->
+      <!-- Middle section with input -->
       <div class="flex-grow p-2">
         <input type="text" [(ngModel)]="newMessage" name="message" placeholder="say Hello.." [required]="true"
           class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-          [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'" />
+          [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-gray-400 text-light-secondary'" />
       </div>
       <!-- Right section with a send button -->
       <div class="p-2">
