@@ -72,10 +72,9 @@
                     Samaka</i></a></span>
             </div>
         </div>
-        <!-- loader -->
-        <div class="loader  w-full h-full">
-          <app-loading-spinner *ngIf="true"></app-loading-spinner>
-        </div>
+      
         </section>
         <!-- Toast -->
         <app-toast *ngIf="showToast" toastType="error" [toastMessage]="toastMessage" (dismiss)="toggleToast()"></app-toast>
+        <!-- loader -->
+        <app-loading-spinner *ngIf="showLoader"></app-loading-spinner>
