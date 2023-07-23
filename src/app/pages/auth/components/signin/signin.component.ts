@@ -12,6 +12,7 @@ import { AuthService } from 'src/core/services/auth.service';
 export class SigninComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
+  showPassword: boolean = false;
   theme: string = '';
 
   authForm = new FormGroup({
@@ -70,6 +71,9 @@ export class SigninComponent implements OnInit {
     setTimeout(() => {
       this.showToast = false;
     }, 4000);
+  }
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
   getCurrentTheme() {
     this.themeService.theme$.subscribe((theme) => {
