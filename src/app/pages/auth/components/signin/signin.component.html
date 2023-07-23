@@ -21,7 +21,7 @@
         </h1>
         <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6">
           <div>
-          <app-input [control]="authForm.controls.email" placeholder="email@mail.com" type="email" label="البريد الالكتروني"
+          <app-input [control]="authForm.controls.email" placeholder="email@mail.com" type="email" label="email"
             [size]="50" [maxlength]="80" [autofocus]="true" [required]="true"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></app-input>
           </div>
