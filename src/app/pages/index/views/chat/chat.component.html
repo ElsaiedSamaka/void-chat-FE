@@ -43,7 +43,8 @@
       </ng-container>
       <ng-template #nomessages>
         <div class="p-2 mx-auto col-span-full h-full">
-          <span class="text-2xl"> start a new conversation</span>
+          <span class="text-2xl" [ngClass]="theme == 'dark'?' text-dark-secondary':' text-light-secondary'"> start a new
+            conversation</span>
           <span class="text-2xl"> 👋</span>
         </div>
         </ng-template>
