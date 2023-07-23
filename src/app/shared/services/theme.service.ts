@@ -5,8 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ThemeService {
-  savedTheme: string = '';
   preferredTheme: string = '';
+  savedTheme: string = localStorage.getItem('theme') || this.preferredTheme;
   theme$ = new BehaviorSubject<string>(this.savedTheme);
   constructor() {
     this.preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
