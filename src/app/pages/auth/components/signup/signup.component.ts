@@ -13,6 +13,7 @@ import { MatchPassword } from 'src/core/validators/match-password';
 export class SignupComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
+  showPassword: boolean = false;
   theme: string = '';
 
   authForm = new FormGroup(
@@ -85,5 +86,8 @@ export class SignupComponent implements OnInit {
     this.themeService.theme$.subscribe((theme) => {
       this.theme = theme;
     });
+  }
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }
