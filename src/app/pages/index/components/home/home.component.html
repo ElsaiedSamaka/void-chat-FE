@@ -26,12 +26,11 @@
         <div class="text-xs ">{{currentUser.email}}</div>
         <div class="flex flex-row items-center mt-3">
           <!-- Toggle theme switch -->
-          <div class="toggle-switch">
-            <label class="switch-label">
-              <input type="checkbox" (change)="toggleTheme()" [checked]="theme=== 'dark'" class="checkbox">
-              <span class="slider"></span>
-            </label>
-      </div>
+          <label class="switch">
+            <input type="checkbox" (change)="toggleTheme()" [checked]="theme=== 'dark'">
+            <span class="slider"></span>
+          </label>
+          <!-- Toggle theme switch -->
         </div>
       </div>
       <div class="flex flex-col mt-8">
