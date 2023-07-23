@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { MatchPassword } from 'src/core/validators/match-password';
@@ -14,6 +15,7 @@ export class SignupComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
   showPassword: boolean = false;
+  showLoader: boolean = false;
   theme: string = '';
 
   authForm = new FormGroup(
@@ -41,6 +43,7 @@ export class SignupComponent implements OnInit {
     private matchPassword: MatchPassword,
     private authService: AuthService,
     private themeService: ThemeService,
+    private loadingService: LoadingService,
     private router: Router
   ) {
     this.getCurrentTheme();
@@ -49,6 +52,7 @@ export class SignupComponent implements OnInit {
     if (this.authForm.invalid) {
       return;
     }
+    this.loadingService.loading$.next(true);
     this.authService
       .signup(
         this.authForm.value.email,
@@ -72,10 +76,19 @@ export class SignupComponent implements OnInit {
           }
           this.toggleToast();
         },
+        complete: () => {
+          this.loadingService.loading$.next(false);
+        },
       });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadingService.loading$.subscribe({
+      next: (value) => {
+        this.showLoader = value;
+      },
+    });
+  }
   toggleToast() {
     this.showToast = !this.showToast;
     setTimeout(() => {

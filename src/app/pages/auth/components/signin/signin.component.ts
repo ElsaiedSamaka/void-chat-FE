@@ -51,7 +51,6 @@ export class SigninComponent implements OnInit {
       return;
     }
     this.loadingService.loading$.next(true);
-    this.showLoader = true;
     this.authService
       .signin(this.authForm.value.email!, this.authForm.value.password!)
       .subscribe({
