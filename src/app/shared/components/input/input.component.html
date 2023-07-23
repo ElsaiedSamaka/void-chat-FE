@@ -2,44 +2,44 @@
   <label class="block text-sm font-semibold text-gray-700">{{label}}</label>
     <ng-content selector="input-icon"></ng-content>
   <input [formControl]="control" [placeholder]="placeholder" [type]="type" [value]="value"
-    class="mt-1 rounded-3xl border-2 border-gray-200 bg-white text-sm text-gray-700 p-2.5  w-full" [ngClass]="control.invalid && showErrors() ? 'border-2 border-red-500':''" [size]="size" [maxlength]="maxlength" [minlength]="minlength" [required]="required" [disabled]="disabled" [pattern]="pattern" [autocomplete]="autocomplete" [autofocus]="autofocus" [title]="title"/>
+    class="mt-1 rounded-3xl border border-gray-200 bg-white text-sm text-gray-700 p-2.5  w-full" [ngClass]="control.invalid && showErrors() ? 'border border-red-500':''" [size]="size" [maxlength]="maxlength" [minlength]="minlength" [required]="required" [disabled]="disabled" [pattern]="pattern" [autocomplete]="autocomplete" [autofocus]="autofocus" [title]="title"/>
   <div
-    class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border-2 border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
+    class="absolute left-1/4 -top-2  z-10 px-3 py-0.5 text-xs font-medium border border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
     *ngIf="showErrors() && control.errors['required']">
     <p class="text-xs  text-center" *ngIf="control.errors['required']">
       هذا الحقل مطلوب
     </p>
 </div>
 <div
-  class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border-2 border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
+  class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
   *ngIf="showErrors() && control.errors['minlength']">
   <p class=" text-xs  text-center" *ngIf="control.errors['minlength']">
     الحد الأدنى للحروف هو {{control.errors['minlength'].requiredLength}}
   </p>
     </div>
     <div
-      class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border-2 border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
+      class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
       *ngIf="showErrors() && control.errors['maxlength']">
       <p class="text-xs  text-center" *ngIf="control.errors['maxlength']">
         الحد الأقصى للحروف هو {{control.errors['maxlength'].requiredLength}}
       </p>
       </div>
       <div
-        class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border-2 border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
+        class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
         *ngIf="showErrors()&&control.errors['pattern']">
         <p class=" text-xs  text-center" *ngIf="control.errors['pattern']">
           صيغة الادخال غير صحيحة
         </p>
           </div>
           <div
-            class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border-2 border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
+            class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
             *ngIf="showErrors()&&control.errors['notEmailUnique']">
             <p class=" text-xs  text-center" *ngIf="control.errors['notEmailUnique']">
               هذا البريد الالكتروني مستخدم من قبل
             </p>
           </div>
           <div
-            class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border-2 border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
+            class="absolute left-1/4 -top-6  z-10 px-3 py-0.5 text-xs font-medium border border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
             *ngIf="showErrors()&&control.errors['zeroOrNegative']">
             <p class=" text-xs  text-center" *ngIf="control.errors['zeroOrNegative']">
               لا يقبل صفر او ارقام سالبة
