@@ -18,6 +18,7 @@ export class SignoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loadingService.loading$.next(true);
     this.loadingService.loading$.subscribe({
       next: (value) => {
         this.showLoader = value;
@@ -25,7 +26,6 @@ export class SignoutComponent implements OnInit {
     });
     this.authService.signout().subscribe({
       next: () => {
-        this.loadingService.loading$.next(true);
         this.router.navigateByUrl('/');
       },
       error: (err) => {
