@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 
@@ -13,6 +14,7 @@ export class SigninComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
   showPassword: boolean = false;
+  showLoader: boolean = false;
   theme: string = '';
 
   authForm = new FormGroup({
@@ -31,16 +33,25 @@ export class SigninComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
+    private loadingService: LoadingService,
     private router: Router
   ) {
     this.getCurrentTheme();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadingService.loading$.subscribe({
+      next: (value) => {
+        this.showLoader = value;
+      },
+    });
+  }
   onSubmit() {
     if (this.authForm.invalid) {
       return;
     }
+    this.loadingService.loading$.next(true);
+    this.showLoader = true;
     this.authService
       .signin(this.authForm.value.email!, this.authForm.value.password!)
       .subscribe({
@@ -62,6 +73,8 @@ export class SigninComponent implements OnInit {
           this.toggleToast();
         },
         complete: () => {
+          this.loadingService.loading$.next(false);
+          // this.showLoader = false;
           this.router.navigateByUrl('/index');
         },
       });

@@ -75,3 +75,5 @@
         </section>
         <!-- Toast -->
         <app-toast *ngIf="showToast" toastType="error" [toastMessage]="toastMessage" (dismiss)="toggleToast()"></app-toast>
+        <!-- loader -->
+        <app-loading-spinner *ngIf="showLoader"></app-loading-spinner>
