@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-input',
@@ -23,13 +24,20 @@ export class InputComponent implements OnInit {
   @Input() tabindex: number = 0;
   @Input() size: number = 50;
   @Input() title: string = '';
-  
+  theme: string = '';
 
   showErrors() {
     const { dirty, touched, errors } = this.control;
     return dirty && touched && errors;
   }
-  constructor() {}
+  constructor(private themeService: ThemeService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCurrentTheme();
+  }
+  getCurrentTheme() {
+    this.themeService.theme$.subscribe((theme) => {
+      this.theme = theme;
+    });
+  }
 }

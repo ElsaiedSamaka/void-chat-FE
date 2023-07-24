@@ -1,5 +1,6 @@
 <div [ngClass]="control.invalid && showErrors() ? 'error relative ' : 'relative'">
-  <label class="block text-sm font-semibold text-gray-700">{{label}}</label>
+  <label class="block text-sm font-semibold"
+    [ngClass]="theme == 'dark'?'text-dark-secondary':'text-light-secondary'">{{label}}</label>
     <ng-content selector="input-icon"></ng-content>
   <input [formControl]="control" [placeholder]="placeholder" [type]="type" [value]="value"
     class="mt-1 rounded-3xl border border-gray-200 bg-white text-sm text-gray-700 p-2.5  w-full" [ngClass]="control.invalid && showErrors() ? 'border border-red-500':''" [size]="size" [maxlength]="maxlength" [minlength]="minlength" [required]="required" [disabled]="disabled" [pattern]="pattern" [autocomplete]="autocomplete" [autofocus]="autofocus" [title]="title"/>
