@@ -15,7 +15,7 @@
   </div>
   <div class=" mt-4 -mx-2">
     <div class="flex items-center justify-around" *ngIf="showSearchInput">
-      <input type="search"
+      <input type="search" [(ngModel)]="searchString" (input)="handleSearchOverContactedUser($event.target)"
         class="p-2 m-4 w-4/5 h-full rounded-xl border-2  border-gray-100 ring-green-300 focus:outline-green-500"
         [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-light-secondary text-light-secondary'"
         placeholder="search your contacts.." [autofocus]="true">

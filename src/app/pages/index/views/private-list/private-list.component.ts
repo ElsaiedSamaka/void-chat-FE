@@ -25,6 +25,7 @@ export class PrivateListComponent implements OnInit {
   selectedContact: any;
   theme: string = '';
   showSearchInput: boolean = false;
+  searchString: string = '';
   showModal: boolean = false;
   showDropdown: boolean = false;
   email: string = '';
@@ -214,5 +215,8 @@ export class PrivateListComponent implements OnInit {
         this.previousValue.id
       );
     }
+  }
+  handleSearchOverContactedUser(target) {
+    console.log('searchString', target.value);
   }
 }
