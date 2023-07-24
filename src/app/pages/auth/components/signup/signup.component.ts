@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
   showPassword: boolean = false;
+  showPasswordConfirmation = false;
   showLoader: boolean = false;
   theme: string = '';
 
@@ -103,5 +104,8 @@ export class SignupComponent implements OnInit {
   }
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+  togglePasswordConfirmation() {
+    this.showPasswordConfirmation = !this.showPasswordConfirmation;
   }
 }
