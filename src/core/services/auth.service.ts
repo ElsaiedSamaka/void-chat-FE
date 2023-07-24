@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -78,6 +78,11 @@ export class AuthService {
         tap((user) => {
           this.signedin$.next(true);
           this.USER$.next(user);
+        }),
+        catchError((err) => {
+          this.signedin$.next(false);
+          this.USER$.next(null);
+          throw err;
         })
       );
   }
