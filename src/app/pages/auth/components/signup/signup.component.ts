@@ -74,6 +74,7 @@ export class SignupComponent implements OnInit {
             this.authForm.setErrors({ unknownError: true });
             this.toastMessage = ' خطأ غير متوقع';
           }
+          this.loadingService.loading$.next(false);
           this.toggleToast();
         },
         complete: () => {
