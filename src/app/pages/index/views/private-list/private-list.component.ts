@@ -64,7 +64,9 @@ export class PrivateListComponent implements OnInit {
     this.myForm.reset();
     this.selectedUsers.length = 0;
     this.toggleModel();
-    this.getContactedUsers();
+    setTimeout(() => {
+      this.getContactedUsers();
+    }, 500);
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
@@ -91,7 +93,6 @@ export class PrivateListComponent implements OnInit {
   }
 
   async getContactedUsers() {
-    console.log('getContactedUsers called');
     try {
       this.contacts = await this.userService.getContactedUsers().toPromise();
       this.selectedContact = this.contacts[0];
