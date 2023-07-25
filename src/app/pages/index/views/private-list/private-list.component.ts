@@ -22,6 +22,7 @@ export class PrivateListComponent implements OnInit {
   users: any[] = [];
   selectedUsers: any[] = [];
   contacts: any[] = [];
+  filteredContacts: any[] = [];
   selectedContact: any;
   theme: string = '';
   showSearchInput: boolean = false;
@@ -80,8 +81,6 @@ export class PrivateListComponent implements OnInit {
         this.currentValue = currentValue;
       });
 
-    console.log('this.previousValue.id', this.previousValue.id);
-    console.log('this.currentValue.id', this.currentValue.id);
     if (this.currentValue.id != this.previousValue.id) {
       this.leaveRoom();
       this.joinRoom();
@@ -96,6 +95,7 @@ export class PrivateListComponent implements OnInit {
     try {
       this.contacts = await this.userService.getContactedUsers().toPromise();
       this.selectedContact = this.contacts[0];
+      this.filteredContacts = this.contacts;
       this.sharedService.selectedContact$.next(this.selectedContact);
       this.joinRoom();
     } catch (error) {
@@ -218,5 +218,15 @@ export class PrivateListComponent implements OnInit {
   }
   handleSearchOverContactedUser(target) {
     console.log('searchString', target.value);
+    const searchString = target.value.toLowerCase().trim();
+
+    // create a regular expression from the search string
+    const regex = new RegExp(searchString, 'i');
+
+    // filter contacts based on search string
+    this.filteredContacts = this.contacts.filter(
+      (contact) => regex.test(contact.name) || regex.test(contact.email)
+    );
+    console.log('filteredContacts', this.filteredContacts);
   }
 }
