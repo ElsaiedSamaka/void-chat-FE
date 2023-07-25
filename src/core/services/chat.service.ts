@@ -48,6 +48,7 @@ export class ChatService {
       message: text,
     });
     this.socket.on('newMessage', (newMessage) => {
+      console.log('newMessage', newMessage);
       this.messages$
         .pipe(
           filter((messages) => !messages.includes(newMessage)),

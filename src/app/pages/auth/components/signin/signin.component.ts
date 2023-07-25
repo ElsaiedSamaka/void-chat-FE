@@ -47,7 +47,6 @@ export class SigninComponent implements OnInit {
     });
     // Check if the user is already authenticated
     this.authService.signedin$.subscribe((authenticated) => {
-      console.log('authenticated', authenticated);
       if (authenticated) {
         // User is already authenticated, navigate to the index page
         this.router.navigateByUrl('/index');
