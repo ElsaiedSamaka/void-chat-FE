@@ -90,17 +90,19 @@
               (input)="handleEmailChange()" [ngModelOptions]="{standalone: true}"
               class="w-full px-4 py-2  rounded-xl " [ngClass]="theme == 'dark'?'bg-[#888888] text-dark-secondary':'bg-white text-light-secondary border-2 border-gray-100'" autofocus>
             <!-- Dropdown menu -->
-            <div *ngIf="showDropdown" id="dropdownSearch" class="absolute  z-10  bg-white rounded-xl shadow w-60 ">
+            <div *ngIf="showDropdown" id="dropdownSearch" class="absolute  z-10  rounded-3xl shadow w-60 "
+              [ngClass]="theme == 'dark'?'bg-dark-accent text-dark-secondary':'bg-white text-light-secondary'">
               <div class="results p-2">
                 <h6 class="font-semibold">Results</h6>
-              <ul class="h-44 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
+              <ul class="h-44 px-3 pb-3 overflow-y-auto text-sm">
                 <ng-container *ngIf="users.length > 0;else nousersfound">
                   <li *ngFor="let user of users">
-                    <div class="flex items-center pl-2 rounded hover:bg-gray-100 ">
+                    <div class="flex items-center pl-2 rounded " [ngClass]="theme == 'dark'?'hover:bg-gray-500':'hover:bg-gray-100'">
                       <input [name]="user.id" [id]="user.id" [value]="user.id" type="checkbox" [checked]="user.isSelected"
                         (change)="handleUserSelect($event)"
                         class="sr-only w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
-                      <label [for]="user.id" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded ">{{user.username}}</label>
+                      <label [for]="user.id" class="w-full py-2 ml-2 text-sm font-medium rounded"
+                        [ngClass]="theme == 'dark'?' text-dark-white':'bg-white text-light-secondary'">{{user.username}}</label>
                       </div>
                   </li>
                 </ng-container>
