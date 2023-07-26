@@ -40,17 +40,13 @@ export class PrivateListComponent implements OnInit {
     private chatService: ChatService,
     private authService: AuthService,
     private themeService: ThemeService
-  ) {
-    // setInterval(() => {
-    this.getContactedUsers();
-    // }, 1000);
-  }
+  ) {}
 
   ngOnInit() {
     this.getCurrentTheme();
     this.handleDropDown();
     this.getCurrentUser();
-    // this.getContacts();
+    this.getContacts();
     this.myForm = new FormGroup({
       message: new FormControl('', Validators.required),
     });
@@ -68,9 +64,8 @@ export class PrivateListComponent implements OnInit {
     this.selectedUsers.length = 0;
     this.toggleModel();
     setTimeout(() => {
-      this.getContactedUsers();
+      this.getContacts();
     }, 500);
-    // this.getContacts()
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
@@ -96,24 +91,28 @@ export class PrivateListComponent implements OnInit {
     this.getMessages();
   }
 
-  async getContactedUsers() {
+  getContacts() {
     try {
-      this.contacts = await this.userService.getContactedUsers().toPromise();
-      this.selectedContact = this.contacts[0];
-      this.filteredContacts = this.contacts;
-      this.sharedService.selectedContact$.next(this.selectedContact);
-      this.joinRoom();
-    } catch (error) {
-      console.log('error while retrieving contacts', error);
+      this.userService.getContactes(this.currentUser.id);
+      this.userService.contacts$.subscribe({
+        next: (contacts) => {
+          console.log('this.userService.contacts$', contacts);
+          this.contacts = contacts;
+          this.filteredContacts = this.contacts;
+        },
+        error: (err) => {
+          console.log('error', err);
+        },
+        complete: () => {
+          this.selectedContact = this.contacts[0];
+          this.sharedService.selectedContact$.next(this.selectedContact);
+          this.joinRoom();
+        },
+      });
+    } catch (err) {
+      console.log('error while retrieving contacts', err);
     }
   }
-  // getContacts() {
-  //   try {
-  //     this.userService.getContactes(this.currentUser.id);
-  //   } catch (err) {
-  //     console.log('error while retrieving contacts', err);
-  //   }
-  // }
   getMessages() {
     if (this.sharedService.selectedContact$.value.id)
       this.chatService.getMessages(
@@ -205,7 +204,6 @@ export class PrivateListComponent implements OnInit {
   }
   joinRoom() {
     const selectedContact = this.selectedContact;
-    console.log('joinRoom called');
     console.log(
       `room:${this.authService.USER$.value.id}-${selectedContact.id}`
     );
@@ -217,7 +215,6 @@ export class PrivateListComponent implements OnInit {
     }
   }
   leaveRoom() {
-    console.log('leaveRoom called');
     console.log(
       `room:${this.authService.USER$.value.id}-${this.previousValue.id}`
     );

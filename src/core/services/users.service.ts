@@ -30,14 +30,14 @@ export class UsersService {
       })
     );
   }
-  // getContactes(userId) {
-  //   this.socketService.socket.emit('getContacts', {
-  //     userId: userId,
-  //   });
-  //   this.socketService.socket.on('contacts', (contacts) => {
-  //     this.contacts$.next(contacts);
-  //   });
-  // }
+  getContactes(userId) {
+    this.socketService.socket.emit('getContacts', {
+      userId: userId,
+    });
+    this.socketService.socket.on('contacts', (contacts) => {
+      this.contacts$.next(contacts);
+    });
+  }
   getUser(): Observable<any> {
     return this.apiService.get(`/api/users/current-user`).pipe(
       tap((user) => {
