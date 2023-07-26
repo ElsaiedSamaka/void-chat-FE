@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +10,10 @@ import { AuthService } from './auth.service';
 export class UsersService {
   users$ = new BehaviorSubject<any[]>([]);
   contactedUsers$ = new BehaviorSubject<any[]>([]);
+  contacts$ = new BehaviorSubject<any[]>([]);
   constructor(
     private apiService: ApiService,
+    private socketService: SocketService,
     private authService: AuthService
   ) {}
   getUsers(email: string): Observable<any[]> {
@@ -27,6 +30,14 @@ export class UsersService {
       })
     );
   }
+  // getContactes(userId) {
+  //   this.socketService.socket.emit('getContacts', {
+  //     userId: userId,
+  //   });
+  //   this.socketService.socket.on('contacts', (contacts) => {
+  //     this.contacts$.next(contacts);
+  //   });
+  // }
   getUser(): Observable<any> {
     return this.apiService.get(`/api/users/current-user`).pipe(
       tap((user) => {

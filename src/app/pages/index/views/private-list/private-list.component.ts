@@ -50,7 +50,7 @@ export class PrivateListComponent implements OnInit {
     this.getCurrentTheme();
     this.handleDropDown();
     this.getCurrentUser();
-    this.getContacts();
+    // this.getContacts();
     this.myForm = new FormGroup({
       message: new FormControl('', Validators.required),
     });
@@ -70,6 +70,7 @@ export class PrivateListComponent implements OnInit {
     setTimeout(() => {
       this.getContactedUsers();
     }, 500);
+    // this.getContacts()
   }
   getCurrentUser() {
     this.authService.USER$.subscribe((res) => {
@@ -106,13 +107,13 @@ export class PrivateListComponent implements OnInit {
       console.log('error while retrieving contacts', error);
     }
   }
-  getContacts() {
-    try {
-      this.chatService.getContactedUsers(this.currentUser.id);
-    } catch (err) {
-      console.log('error while retrieving contacts', err);
-    }
-  }
+  // getContacts() {
+  //   try {
+  //     this.userService.getContactes(this.currentUser.id);
+  //   } catch (err) {
+  //     console.log('error while retrieving contacts', err);
+  //   }
+  // }
   getMessages() {
     if (this.sharedService.selectedContact$.value.id)
       this.chatService.getMessages(
