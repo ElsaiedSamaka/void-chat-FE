@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class ChatService {
-  private socket: Socket;
+  socket: Socket;
   currentUser;
   selectedContact;
   messages$ = new BehaviorSubject<any[]>([]);
@@ -69,6 +69,16 @@ export class ChatService {
     this.socket.emit('leave', {
       userId: userId,
       recipientId: recipientId,
+    });
+  }
+
+  getContactedUsers(userId) {
+    console.log('called');
+    this.socket.emit('getContacts', {
+      userId: userId,
+    });
+    this.socket.on('contacts', (contacts) => {
+      console.log('contacts', contacts);
     });
   }
 }

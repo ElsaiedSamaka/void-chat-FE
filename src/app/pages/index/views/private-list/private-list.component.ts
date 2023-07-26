@@ -41,13 +41,16 @@ export class PrivateListComponent implements OnInit {
     private authService: AuthService,
     private themeService: ThemeService
   ) {
+    // setInterval(() => {
     this.getContactedUsers();
+    // }, 1000);
   }
 
   ngOnInit() {
     this.getCurrentTheme();
     this.handleDropDown();
     this.getCurrentUser();
+    this.getContacts();
     this.myForm = new FormGroup({
       message: new FormControl('', Validators.required),
     });
@@ -101,6 +104,13 @@ export class PrivateListComponent implements OnInit {
       this.joinRoom();
     } catch (error) {
       console.log('error while retrieving contacts', error);
+    }
+  }
+  getContacts() {
+    try {
+      this.chatService.getContactedUsers(this.currentUser.id);
+    } catch (err) {
+      console.log('error while retrieving contacts', err);
     }
   }
   getMessages() {
