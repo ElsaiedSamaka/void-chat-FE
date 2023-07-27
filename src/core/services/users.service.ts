@@ -30,9 +30,9 @@ export class UsersService {
       })
     );
   }
-  getContactes(userId) {
+  getContactes(user) {
     this.socketService.socket.emit('getContacts', {
-      userId: userId,
+      user: user,
     });
     this.socketService.socket.on('contacts', (contacts) => {
       console.log('contacts from client', contacts);

@@ -92,7 +92,7 @@ export class PrivateListComponent implements OnInit {
   }
   getContacts() {
     try {
-      this.userService.getContactes(this.authService.USER$.value.id);
+      this.userService.getContactes(this.authService.USER$.value);
       this.userService.contacts$.subscribe({
         next: (contacts) => {
           this.contacts = contacts;
