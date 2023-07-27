@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
-import { getCookie } from '../helper/getCookie';
-import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment.prod';
+import { getCookie } from '../helper/getCookie';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +9,21 @@ import { environment } from 'src/environments/environment.prod';
 export class SocketService {
   socket: Socket;
 
-  constructor(private authService: AuthService) {
+  constructor() {
     const token = getCookie('token');
+    console.log('token', token);
     this.socket = io(environment.api_url, {
-      query: { token, userId: this.authService.USER$.value.id },
+      query: { token },
+      autoConnect: false,
     });
+    this.testConnection();
+  }
+  testConnection() {
+    this.socket.on('testrespond', (mssg) => {
+      console.log('mssg', mssg);
+    });
+    setInterval(() => {
+      this.socket.emit('testevent', 'hello from client');
+    }, 2000);
   }
 }

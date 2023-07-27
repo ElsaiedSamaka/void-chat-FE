@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class AuthService {
   signedin$ = new BehaviorSubject<boolean>(false);
   USER$ = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private socketService: SocketService) {}
   // emailAvailable will be called whenever the user types in the email field
   // we will send the email to the server and check if it is available
   emailAvailable(email: string) {
@@ -38,6 +39,7 @@ export class AuthService {
       )
       .pipe(
         tap((user) => {
+          this.socketService.socket.connect();
           this.signedin$.next(true);
           this.USER$.next(user);
         })
@@ -57,6 +59,7 @@ export class AuthService {
   signout() {
     return this.http.post<any>(`${this.api_url}/api/auth/signout`, {}).pipe(
       tap(() => {
+        this.socketService.socket.disconnect();
         this.signedin$.next(false);
         this.USER$.next(null);
       })
@@ -76,6 +79,7 @@ export class AuthService {
       )
       .pipe(
         tap((user) => {
+          this.socketService.socket.open();
           this.signedin$.next(true);
           this.USER$.next(user);
         }),
