@@ -10,6 +10,7 @@ import {
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AuthService } from 'src/core/services/auth.service';
 import { ChatService } from 'src/core/services/chat.service';
+import { SocketService } from 'src/core/services/socket.service';
 import { UsersService } from 'src/core/services/users.service';
 import { SharedService } from '../../services/shared.service';
 
@@ -39,7 +40,8 @@ export class PrivateListComponent implements OnInit {
     private sharedService: SharedService,
     private chatService: ChatService,
     private authService: AuthService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
@@ -47,6 +49,7 @@ export class PrivateListComponent implements OnInit {
     this.handleDropDown();
     this.getCurrentUser();
     this.getContacts();
+    this.getUpdatedContacts();
     this.myForm = new FormGroup({
       message: new FormControl('', Validators.required),
     });
@@ -89,6 +92,13 @@ export class PrivateListComponent implements OnInit {
       this.joinRoom();
     }
     this.getMessages();
+  }
+  getUpdatedContacts() {
+    setInterval(() => {
+      this.socketService.socket.emit('getContacts', {
+        user: this.authService.USER$.value,
+      });
+    }, 3000);
   }
   getContacts() {
     try {
