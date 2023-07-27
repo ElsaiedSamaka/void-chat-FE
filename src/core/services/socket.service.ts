@@ -24,6 +24,6 @@ export class SocketService {
     });
     setInterval(() => {
       this.socket.emit('testevent', 'hello from client');
-    }, 2000);
+    }, 5000);
   }
 }

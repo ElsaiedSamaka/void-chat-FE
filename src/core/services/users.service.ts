@@ -35,6 +35,7 @@ export class UsersService {
       userId: userId,
     });
     this.socketService.socket.on('contacts', (contacts) => {
+      console.log('contacts from client', contacts);
       this.contacts$.next(contacts);
     });
   }
