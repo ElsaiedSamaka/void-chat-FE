@@ -22,8 +22,8 @@ export class SocketService {
     this.socket.on('testrespond', (mssg) => {
       console.log('mssg', mssg);
     });
-    setInterval(() => {
-      this.socket.emit('testevent', 'hello from client');
-    }, 5000);
+    // setInterval(() => {
+    //   this.socket.emit('testevent', 'hello from client');
+    // }, 5000);
   }
 }

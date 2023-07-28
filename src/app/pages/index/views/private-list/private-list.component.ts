@@ -49,7 +49,7 @@ export class PrivateListComponent implements OnInit {
     this.handleDropDown();
     this.getCurrentUser();
     this.getContacts();
-    this.getUpdatedContacts();
+    // this.getUpdatedContacts();
     this.myForm = new FormGroup({
       message: new FormControl('', Validators.required),
     });
