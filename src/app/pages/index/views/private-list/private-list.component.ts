@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   debounceTime,
@@ -19,7 +19,7 @@ import { SharedService } from '../../services/shared.service';
   templateUrl: './private-list.component.html',
   styleUrls: ['./private-list.component.css'],
 })
-export class PrivateListComponent implements OnInit {
+export class PrivateListComponent implements OnInit, OnChanges {
   users: any[] = [];
   selectedUsers: any[] = [];
   contacts: any[] = [];
@@ -43,6 +43,12 @@ export class PrivateListComponent implements OnInit {
     private themeService: ThemeService,
     private socketService: SocketService
   ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    throw new Error('Method not implemented.');
+  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   this.getUpdatedContacts();
+  // }
 
   ngOnInit() {
     this.getCurrentTheme();
@@ -54,7 +60,6 @@ export class PrivateListComponent implements OnInit {
       message: new FormControl('', Validators.required),
     });
   }
-
   onSubmit() {
     if (this.myForm.invalid) return;
     //send message

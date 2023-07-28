@@ -15,7 +15,9 @@ export class UsersService {
     private apiService: ApiService,
     private socketService: SocketService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.getContactes(this.authService.USER$.value);
+  }
   getUsers(email: string): Observable<any[]> {
     return this.apiService.get(`/api/users?email=${email}`).pipe(
       tap((res) => {
