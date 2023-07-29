@@ -122,10 +122,10 @@ export class PrivateListComponent implements OnInit {
     }
   }
   getMessages() {
-    if (this.sharedService.selectedContact$.value.id)
+    if (this.selectedContact.id)
       this.chatService.getMessages(
         this.authService.USER$.value.id,
-        this.sharedService.selectedContact$.value?.id
+        this.selectedContact.id
       );
   }
   getUsers() {
