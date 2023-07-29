@@ -3,7 +3,7 @@
     [ngClass]="theme == 'dark'?'text-dark-secondary':'text-light-secondary'">{{label}}</label>
     <ng-content selector="input-icon"></ng-content>
   <input [formControl]="control" [placeholder]="placeholder" [type]="type" [value]="value"
-    class="mt-1 rounded-3xl border border-gray-200 bg-white text-sm text-gray-700 p-2.5  w-full" [ngClass]="control.invalid && showErrors() ? 'border border-red-500':''" [size]="size" [maxlength]="maxlength" [minlength]="minlength" [required]="required" [disabled]="disabled" [pattern]="pattern" [autocomplete]="autocomplete" [autofocus]="autofocus" [title]="title"/>
+    class="mt-1 rounded-3xl border border-gray-200 bg-white text-sm font-semibold text-gray-700 p-2.5  w-full" [ngClass]="control.invalid && showErrors() ? 'border border-red-500':''" [size]="size" [maxlength]="maxlength" [minlength]="minlength" [required]="required" [disabled]="disabled" [pattern]="pattern" [autocomplete]="autocomplete" [autofocus]="autofocus" [title]="title"/>
   <div
     class="absolute left-1/4 -top-1  z-10 px-3 py-0.5 text-xs font-medium border border-red-500 text-red-500 rounded-3xl shadow-sm backdrop-blur-3xl tooltip"
     *ngIf="showErrors() && control.errors['required']">
