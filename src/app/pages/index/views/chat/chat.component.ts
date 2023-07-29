@@ -19,6 +19,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   toggled: boolean = false;
   handleSelection(event) {
     console.log(event.char);
+    this.newMessage += event.char;
   }
   currentUser;
   selectedGroup: any;
