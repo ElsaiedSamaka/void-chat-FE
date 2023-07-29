@@ -14,16 +14,15 @@ export class SocketService {
     console.log('token', token);
     this.socket = io(environment.api_url, {
       query: { token },
-      autoConnect: false,
+      autoConnect: true,
     });
-    this.testConnection();
   }
-  testConnection() {
+  testConnection(payload) {
     this.socket.on('testrespond', (mssg) => {
       console.log('mssg', mssg);
     });
-    // setInterval(() => {
-    //   this.socket.emit('testevent', 'hello from client');
-    // }, 5000);
+    setInterval(() => {
+      this.socket.emit('testevent', payload);
+    }, 5000);
   }
 }
