@@ -6,7 +6,6 @@ import { InputComponent } from './components/input/input.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ToastComponent } from './components/toast/toast.component';
-
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   declarations: [

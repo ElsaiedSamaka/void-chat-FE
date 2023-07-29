@@ -16,6 +16,10 @@ import { SharedService } from '../../services/shared.service';
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
+  toggled: boolean = false;
+  handleSelection(event) {
+    console.log(event.char);
+  }
   currentUser;
   selectedGroup: any;
   selectedContact: any;
@@ -40,7 +44,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     });
     this.sharedService.selectedContact$.subscribe((selectedContact) => {
       this.selectedContact = selectedContact;
-        this.getMessages();
+      this.getMessages();
     });
     // get current user
     this.getCurrentUser();
@@ -66,7 +70,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   getMessages() {
-    if (this.sharedService.selectedContact$.value.id ) {
+    if (this.sharedService.selectedContact$.value.id) {
       this.chatService.getMessages(
         this.currentUser.id,
         this.sharedService.selectedContact$.value.id
