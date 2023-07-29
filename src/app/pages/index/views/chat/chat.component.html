@@ -79,8 +79,8 @@
       <div class="flex-grow p-2">
         <input type="text" (keyup.enter)="sendMessage()" [(ngModel)]="newMessage" name="message" placeholder="say Hello.."
           [required]="true"
-          class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-          [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 text-gray-50':' bg-gray-50 placeholder:text-gray-400 text-light-secondary'" />
+          class="flex w-full font-semibold border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
+          [ngClass]="theme == 'dark'?' bg-dark-accent placeholder:text-gray-50 placeholder:font-thin text-gray-50':' bg-gray-50 placeholder:text-gray-400  placeholder:font-thin text-light-secondary'" />
       </div>
       <!-- Right section with a send button -->
       <div class="p-2">
